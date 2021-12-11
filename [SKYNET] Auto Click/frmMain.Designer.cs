@@ -29,6 +29,7 @@ namespace SKYNET
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.PN_Top = new System.Windows.Forms.Panel();
             this.MinimizeBox = new SKYNET.Controls.SKYNET_MinimizeBox();
             this.CloseBox = new SKYNET.Controls.SKYNET_CloseBox();
@@ -39,6 +40,7 @@ namespace SKYNET
             this.LB_Stop = new SKYNET.Controls.SKYNET_Label();
             this.LB_Capture = new SKYNET.Controls.SKYNET_Label();
             this.LB_CurrentLocation = new SKYNET.Controls.SKYNET_Label();
+            this.LB_Time = new SKYNET.Controls.SKYNET_Label();
             this.PN_Top.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +59,7 @@ namespace SKYNET
             this.MinimizeBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.MinimizeBox.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.MinimizeBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MinimizeBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(62)))));
+            this.MinimizeBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.MinimizeBox.Location = new System.Drawing.Point(325, 0);
             this.MinimizeBox.MaximumSize = new System.Drawing.Size(34, 26);
             this.MinimizeBox.MinimumSize = new System.Drawing.Size(34, 26);
@@ -71,7 +73,7 @@ namespace SKYNET
             this.CloseBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.CloseBox.Color = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.CloseBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CloseBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(62)))));
+            this.CloseBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.CloseBox.Location = new System.Drawing.Point(359, 0);
             this.CloseBox.MaximumSize = new System.Drawing.Size(34, 26);
             this.CloseBox.MinimumSize = new System.Drawing.Size(34, 26);
@@ -90,7 +92,7 @@ namespace SKYNET
             this.BT_Settings.ForeColorMouseOver = System.Drawing.Color.Empty;
             this.BT_Settings.ImageAlignment = SKYNET.Controls.SKYNET_Button.ImgAlign.Left;
             this.BT_Settings.ImageIcon = null;
-            this.BT_Settings.Location = new System.Drawing.Point(339, 204);
+            this.BT_Settings.Location = new System.Drawing.Point(331, 204);
             this.BT_Settings.MenuMode = true;
             this.BT_Settings.Name = "BT_Settings";
             this.BT_Settings.Rounded = false;
@@ -105,9 +107,9 @@ namespace SKYNET
             this.LB_Tittle.ChangeColor = false;
             this.LB_Tittle.Font = new System.Drawing.Font("Segoe UI Emoji", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Tittle.GradiantColor = true;
-            this.LB_Tittle.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
-            this.LB_Tittle.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
-            this.LB_Tittle.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.LB_Tittle.GradiantColor1 = System.Drawing.Color.Silver;
+            this.LB_Tittle.GradiantColor2 = System.Drawing.Color.White;
+            this.LB_Tittle.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
             this.LB_Tittle.Location = new System.Drawing.Point(61, 36);
             this.LB_Tittle.Name = "LB_Tittle";
             this.LB_Tittle.Size = new System.Drawing.Size(281, 38);
@@ -199,7 +201,7 @@ namespace SKYNET
             this.LB_CurrentLocation.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
             this.LB_CurrentLocation.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
             this.LB_CurrentLocation.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.LB_CurrentLocation.Location = new System.Drawing.Point(64, 215);
+            this.LB_CurrentLocation.Location = new System.Drawing.Point(64, 211);
             this.LB_CurrentLocation.Name = "LB_CurrentLocation";
             this.LB_CurrentLocation.Size = new System.Drawing.Size(101, 17);
             this.LB_CurrentLocation.TabIndex = 9;
@@ -207,12 +209,31 @@ namespace SKYNET
             this.LB_CurrentLocation.TextColor = System.Drawing.SystemColors.ControlText;
             this.LB_CurrentLocation.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
+            // LB_Time
+            // 
+            this.LB_Time.AutoSize = true;
+            this.LB_Time.ChangeColor = false;
+            this.LB_Time.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Time.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.LB_Time.GradiantColor = false;
+            this.LB_Time.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
+            this.LB_Time.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
+            this.LB_Time.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.LB_Time.Location = new System.Drawing.Point(64, 192);
+            this.LB_Time.Name = "LB_Time";
+            this.LB_Time.Size = new System.Drawing.Size(149, 17);
+            this.LB_Time.TabIndex = 10;
+            this.LB_Time.Text = "Current interval seconds";
+            this.LB_Time.TextColor = System.Drawing.SystemColors.ControlText;
+            this.LB_Time.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(393, 253);
+            this.Controls.Add(this.LB_Time);
             this.Controls.Add(this.LB_CurrentLocation);
             this.Controls.Add(this.LB_Capture);
             this.Controls.Add(this.LB_Stop);
@@ -221,6 +242,7 @@ namespace SKYNET
             this.Controls.Add(this.LB_Tittle);
             this.Controls.Add(this.BT_Settings);
             this.Controls.Add(this.PN_Top);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
@@ -243,6 +265,7 @@ namespace SKYNET
         private Controls.SKYNET_Label LB_Stop;
         private Controls.SKYNET_Label LB_Capture;
         private Controls.SKYNET_Label LB_CurrentLocation;
+        private Controls.SKYNET_Label LB_Time;
     }
 }
 

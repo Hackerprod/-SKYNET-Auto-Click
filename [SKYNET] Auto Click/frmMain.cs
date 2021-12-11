@@ -22,6 +22,7 @@ namespace SKYNET
         private int Y;
         public static Settings Settings;
         public static bool SettingsMode;
+        public bool isCaptured;
 
 
         public frmMain()
@@ -34,14 +35,7 @@ namespace SKYNET
             Settings = new Settings();
             Settings.Load();
 
-            ShowSettings();
-        }
-
-        private void ShowSettings()
-        {
-            LB_Capture.Text = $"Press {Settings.Capture.ToString().ToUpper()} button to capture mouse location";
-            LB_Start.Text = $"Press {Settings.Start.ToString().ToUpper()} button to start";
-            LB_Stop.Text = $"Press {Settings.Stop.ToString().ToUpper()} button to stop";
+            LoadData();
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -61,7 +55,7 @@ namespace SKYNET
 
         private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
         {
-            if (SettingsMode) return;
+            if (SettingsMode) return; 
 
             if ((int)key == (int)Settings.Capture)
             {
@@ -69,9 +63,11 @@ namespace SKYNET
                 X = p.X;
                 Y = p.Y;
                 LB_CurrentLocation.Text = $"Current location (X:{X} Y:{Y})";
+                isCaptured = true;
             }
             else if ((int)key == (int)Settings.Start)
             {
+                if (!isCaptured) return;
                 _timer.AutoReset = false;
                 _timer.Elapsed += _timer_Elapsed;
                 _timer.Start();
@@ -99,6 +95,16 @@ namespace SKYNET
             new frmSettings().ShowDialog();
             SettingsMode = false;
             Visible = true;
+            LoadData();
+            Settings.Save();
+        }
+
+        private void LoadData()
+        {
+            LB_Capture.Text = $"Press {Settings.Capture.ToString().ToUpper()} button to capture mouse location";
+            LB_Start.Text = $"Press {Settings.Start.ToString().ToUpper()} button to start";
+            LB_Stop.Text = $"Press {Settings.Stop.ToString().ToUpper()} button to stop";
+            LB_Time.Text = $"Current interval seconds: {Settings.Seconds}";
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
