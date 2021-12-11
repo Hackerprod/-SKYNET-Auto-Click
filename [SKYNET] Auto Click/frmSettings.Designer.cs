@@ -1,7 +1,7 @@
 ﻿
 namespace SKYNET
 {
-    partial class frmMain
+    partial class frmSettings
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,28 +29,28 @@ namespace SKYNET
         /// </summary>
         private void InitializeComponent()
         {
-            this.PN_Top = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.MinimizeBox = new SKYNET.Controls.SKYNET_MinimizeBox();
             this.CloseBox = new SKYNET.Controls.SKYNET_CloseBox();
-            this.BT_Settings = new SKYNET.Controls.SKYNET_Button();
+            this.skyneT_Button1 = new SKYNET.Controls.SKYNET_Button();
             this.LB_Tittle = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label1 = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label2 = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label3 = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label4 = new SKYNET.Controls.SKYNET_Label();
             this.LB_CurrentLocation = new SKYNET.Controls.SKYNET_Label();
-            this.PN_Top.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // PN_Top
+            // panel1
             // 
-            this.PN_Top.Controls.Add(this.MinimizeBox);
-            this.PN_Top.Controls.Add(this.CloseBox);
-            this.PN_Top.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PN_Top.Location = new System.Drawing.Point(0, 0);
-            this.PN_Top.Name = "PN_Top";
-            this.PN_Top.Size = new System.Drawing.Size(393, 25);
-            this.PN_Top.TabIndex = 2;
+            this.panel1.Controls.Add(this.MinimizeBox);
+            this.panel1.Controls.Add(this.CloseBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(393, 25);
+            this.panel1.TabIndex = 2;
             // 
             // MinimizeBox
             // 
@@ -80,25 +80,24 @@ namespace SKYNET
             this.CloseBox.TabIndex = 4;
             this.CloseBox.Clicked += new System.EventHandler(this.CloseBox_Clicked);
             // 
-            // BT_Settings
+            // skyneT_Button1
             // 
-            this.BT_Settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
-            this.BT_Settings.BackColorMouseOver = System.Drawing.Color.Empty;
-            this.BT_Settings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BT_Settings.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BT_Settings.ForeColor = System.Drawing.Color.White;
-            this.BT_Settings.ForeColorMouseOver = System.Drawing.Color.Empty;
-            this.BT_Settings.ImageAlignment = SKYNET.Controls.SKYNET_Button.ImgAlign.Left;
-            this.BT_Settings.ImageIcon = null;
-            this.BT_Settings.Location = new System.Drawing.Point(339, 204);
-            this.BT_Settings.MenuMode = true;
-            this.BT_Settings.Name = "BT_Settings";
-            this.BT_Settings.Rounded = false;
-            this.BT_Settings.Size = new System.Drawing.Size(42, 28);
-            this.BT_Settings.Style = SKYNET.Controls.SKYNET_Button._Style.TextOnly;
-            this.BT_Settings.TabIndex = 3;
-            this.BT_Settings.Text = "Settings";
-            this.BT_Settings.Click += new System.EventHandler(this.BT_Settings_Click);
+            this.skyneT_Button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
+            this.skyneT_Button1.BackColorMouseOver = System.Drawing.Color.Empty;
+            this.skyneT_Button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.skyneT_Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.skyneT_Button1.ForeColor = System.Drawing.Color.White;
+            this.skyneT_Button1.ForeColorMouseOver = System.Drawing.Color.Empty;
+            this.skyneT_Button1.ImageAlignment = SKYNET.Controls.SKYNET_Button.ImgAlign.Left;
+            this.skyneT_Button1.ImageIcon = null;
+            this.skyneT_Button1.Location = new System.Drawing.Point(339, 204);
+            this.skyneT_Button1.MenuMode = true;
+            this.skyneT_Button1.Name = "skyneT_Button1";
+            this.skyneT_Button1.Rounded = false;
+            this.skyneT_Button1.Size = new System.Drawing.Size(42, 28);
+            this.skyneT_Button1.Style = SKYNET.Controls.SKYNET_Button._Style.TextOnly;
+            this.skyneT_Button1.TabIndex = 3;
+            this.skyneT_Button1.Text = "Settings";
             // 
             // LB_Tittle
             // 
@@ -219,23 +218,22 @@ namespace SKYNET
             this.Controls.Add(this.skyneT_Label2);
             this.Controls.Add(this.skyneT_Label1);
             this.Controls.Add(this.LB_Tittle);
-            this.Controls.Add(this.BT_Settings);
-            this.Controls.Add(this.PN_Top);
+            this.Controls.Add(this.skyneT_Button1);
+            this.Controls.Add(this.panel1);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.PN_Top.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel PN_Top;
+        private System.Windows.Forms.Panel panel1;
         private Controls.SKYNET_MinimizeBox MinimizeBox;
         private Controls.SKYNET_CloseBox CloseBox;
-        private Controls.SKYNET_Button BT_Settings;
+        private Controls.SKYNET_Button skyneT_Button1;
         private Controls.SKYNET_Label LB_Tittle;
         private Controls.SKYNET_Label skyneT_Label1;
         private Controls.SKYNET_Label skyneT_Label2;

@@ -51,12 +51,8 @@ namespace SKYNET.GUI
         public frmBase()
         {
             InitializeComponent();
-
+            CheckForIllegalCrossThreadCalls = false;
         }
-        //public virtual void ApplyTheme(ColorTheme theme)
-        //{
-
-        //}
         private void EnableBlur()
         {
             var accent = new AccentPolicy();

@@ -16,21 +16,23 @@ namespace SKYNET
 {
     public partial class frmMain : frmBase
     {
-        private readonly System.Timers.Timer _timer = new System.Timers.Timer();
+        private KeyboardHook keyboardHook;
+        private System.Timers.Timer _timer;
         private int X;
         private int Y;
+        public static Settings Settings;
 
-        private KeyboardHook keyboardHook;
         public frmMain()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+            SetMouseMove(PN_Top);
+
+            _timer = new System.Timers.Timer();
+            Settings = new Settings();
+            Settings.Load();
         }
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            DoPing();
-        }
-
-        private void DoPing()
         {
             LeftMouseClick(X, Y);
 
@@ -61,6 +63,8 @@ namespace SKYNET
 
         public const int MOUSEEVENTF_LEFTDOWN = 0x02;
         public const int MOUSEEVENTF_LEFTUP = 0x04;
+
+        public static bool SettingsMode { get; internal set; }
 
         //Esto simula un click con el botón izquierdo del ratón
         public static void LeftMouseClick(int xpos, int ypos)
@@ -108,9 +112,9 @@ namespace SKYNET
             WindowState = FormWindowState.Minimized;
         }
 
-        private void skyneT_Button1_Click(object sender, EventArgs e)
+        private void BT_Settings_Click(object sender, EventArgs e)
         {
-
+            new frmSettings().ShowDialog();
         }
     }
 }
