@@ -26,7 +26,6 @@ namespace SKYNET
             Registry = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(SubKey, true);
             if (Registry == null)
             {
-                modCommon.Show("null");
                 Microsoft.Win32.Registry.CurrentUser.CreateSubKey(SubKey);
 
                 Capture = Keys.Insert;
