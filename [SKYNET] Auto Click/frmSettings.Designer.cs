@@ -37,7 +37,7 @@ namespace SKYNET
             this.skyneT_Label1 = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label2 = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label3 = new SKYNET.Controls.SKYNET_Label();
-            this.skyneT_Label4 = new SKYNET.Controls.SKYNET_Label();
+            this.LB_Capture = new SKYNET.Controls.SKYNET_Label();
             this.LB_CurrentLocation = new SKYNET.Controls.SKYNET_Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -170,23 +170,23 @@ namespace SKYNET
             this.skyneT_Label3.TextColor = System.Drawing.SystemColors.ControlText;
             this.skyneT_Label3.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
-            // skyneT_Label4
+            // LB_Capture
             // 
-            this.skyneT_Label4.AutoSize = true;
-            this.skyneT_Label4.ChangeColor = false;
-            this.skyneT_Label4.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.skyneT_Label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.skyneT_Label4.GradiantColor = false;
-            this.skyneT_Label4.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
-            this.skyneT_Label4.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
-            this.skyneT_Label4.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.skyneT_Label4.Location = new System.Drawing.Point(64, 113);
-            this.skyneT_Label4.Name = "skyneT_Label4";
-            this.skyneT_Label4.Size = new System.Drawing.Size(284, 17);
-            this.skyneT_Label4.TabIndex = 8;
-            this.skyneT_Label4.Text = "Press INSERT button to capture mouse location";
-            this.skyneT_Label4.TextColor = System.Drawing.SystemColors.ControlText;
-            this.skyneT_Label4.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
+            this.LB_Capture.AutoSize = true;
+            this.LB_Capture.ChangeColor = false;
+            this.LB_Capture.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Capture.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.LB_Capture.GradiantColor = false;
+            this.LB_Capture.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
+            this.LB_Capture.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
+            this.LB_Capture.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.LB_Capture.Location = new System.Drawing.Point(64, 113);
+            this.LB_Capture.Name = "LB_Capture";
+            this.LB_Capture.Size = new System.Drawing.Size(284, 17);
+            this.LB_Capture.TabIndex = 8;
+            this.LB_Capture.Text = "Press INSERT button to capture mouse location";
+            this.LB_Capture.TextColor = System.Drawing.SystemColors.ControlText;
+            this.LB_Capture.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
             // LB_CurrentLocation
             // 
@@ -206,21 +206,21 @@ namespace SKYNET
             this.LB_CurrentLocation.TextColor = System.Drawing.SystemColors.ControlText;
             this.LB_CurrentLocation.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
-            // frmMain
+            // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(393, 253);
             this.Controls.Add(this.LB_CurrentLocation);
-            this.Controls.Add(this.skyneT_Label4);
+            this.Controls.Add(this.LB_Capture);
             this.Controls.Add(this.skyneT_Label3);
             this.Controls.Add(this.skyneT_Label2);
             this.Controls.Add(this.skyneT_Label1);
             this.Controls.Add(this.LB_Tittle);
             this.Controls.Add(this.skyneT_Button1);
             this.Controls.Add(this.panel1);
-            this.Name = "frmMain";
+            this.Name = "frmSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.panel1.ResumeLayout(false);
@@ -238,7 +238,7 @@ namespace SKYNET
         private Controls.SKYNET_Label skyneT_Label1;
         private Controls.SKYNET_Label skyneT_Label2;
         private Controls.SKYNET_Label skyneT_Label3;
-        private Controls.SKYNET_Label skyneT_Label4;
+        private Controls.SKYNET_Label LB_Capture;
         private Controls.SKYNET_Label LB_CurrentLocation;
     }
 }

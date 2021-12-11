@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace _SKYNET__Auto_Click
+public class modCommon
 {
-    internal class modCommon
+    public static void Show(object v)
     {
-        internal static void Show(object v)
-        {
-            MessageBox.Show(v.ToString());
-        }
+        MessageBox.Show(v.ToString());
     }
 }

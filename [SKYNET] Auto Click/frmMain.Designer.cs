@@ -35,9 +35,9 @@ namespace SKYNET
             this.BT_Settings = new SKYNET.Controls.SKYNET_Button();
             this.LB_Tittle = new SKYNET.Controls.SKYNET_Label();
             this.skyneT_Label1 = new SKYNET.Controls.SKYNET_Label();
-            this.skyneT_Label2 = new SKYNET.Controls.SKYNET_Label();
-            this.skyneT_Label3 = new SKYNET.Controls.SKYNET_Label();
-            this.skyneT_Label4 = new SKYNET.Controls.SKYNET_Label();
+            this.LB_Start = new SKYNET.Controls.SKYNET_Label();
+            this.LB_Stop = new SKYNET.Controls.SKYNET_Label();
+            this.LB_Capture = new SKYNET.Controls.SKYNET_Label();
             this.LB_CurrentLocation = new SKYNET.Controls.SKYNET_Label();
             this.PN_Top.SuspendLayout();
             this.SuspendLayout();
@@ -135,59 +135,59 @@ namespace SKYNET
             this.skyneT_Label1.TextColor = System.Drawing.SystemColors.ControlText;
             this.skyneT_Label1.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
-            // skyneT_Label2
+            // LB_Start
             // 
-            this.skyneT_Label2.AutoSize = true;
-            this.skyneT_Label2.ChangeColor = false;
-            this.skyneT_Label2.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.skyneT_Label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.skyneT_Label2.GradiantColor = false;
-            this.skyneT_Label2.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
-            this.skyneT_Label2.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
-            this.skyneT_Label2.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.skyneT_Label2.Location = new System.Drawing.Point(64, 133);
-            this.skyneT_Label2.Name = "skyneT_Label2";
-            this.skyneT_Label2.Size = new System.Drawing.Size(169, 17);
-            this.skyneT_Label2.TabIndex = 6;
-            this.skyneT_Label2.Text = "Press HOME button to start";
-            this.skyneT_Label2.TextColor = System.Drawing.SystemColors.ControlText;
-            this.skyneT_Label2.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
+            this.LB_Start.AutoSize = true;
+            this.LB_Start.ChangeColor = false;
+            this.LB_Start.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Start.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.LB_Start.GradiantColor = false;
+            this.LB_Start.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
+            this.LB_Start.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
+            this.LB_Start.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.LB_Start.Location = new System.Drawing.Point(64, 133);
+            this.LB_Start.Name = "LB_Start";
+            this.LB_Start.Size = new System.Drawing.Size(169, 17);
+            this.LB_Start.TabIndex = 6;
+            this.LB_Start.Text = "Press HOME button to start";
+            this.LB_Start.TextColor = System.Drawing.SystemColors.ControlText;
+            this.LB_Start.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
-            // skyneT_Label3
+            // LB_Stop
             // 
-            this.skyneT_Label3.AutoSize = true;
-            this.skyneT_Label3.ChangeColor = false;
-            this.skyneT_Label3.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.skyneT_Label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.skyneT_Label3.GradiantColor = false;
-            this.skyneT_Label3.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
-            this.skyneT_Label3.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
-            this.skyneT_Label3.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.skyneT_Label3.Location = new System.Drawing.Point(64, 153);
-            this.skyneT_Label3.Name = "skyneT_Label3";
-            this.skyneT_Label3.Size = new System.Drawing.Size(157, 17);
-            this.skyneT_Label3.TabIndex = 7;
-            this.skyneT_Label3.Text = "Press END button to stop";
-            this.skyneT_Label3.TextColor = System.Drawing.SystemColors.ControlText;
-            this.skyneT_Label3.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
+            this.LB_Stop.AutoSize = true;
+            this.LB_Stop.ChangeColor = false;
+            this.LB_Stop.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Stop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.LB_Stop.GradiantColor = false;
+            this.LB_Stop.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
+            this.LB_Stop.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
+            this.LB_Stop.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.LB_Stop.Location = new System.Drawing.Point(64, 153);
+            this.LB_Stop.Name = "LB_Stop";
+            this.LB_Stop.Size = new System.Drawing.Size(157, 17);
+            this.LB_Stop.TabIndex = 7;
+            this.LB_Stop.Text = "Press END button to stop";
+            this.LB_Stop.TextColor = System.Drawing.SystemColors.ControlText;
+            this.LB_Stop.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
-            // skyneT_Label4
+            // LB_Capture
             // 
-            this.skyneT_Label4.AutoSize = true;
-            this.skyneT_Label4.ChangeColor = false;
-            this.skyneT_Label4.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.skyneT_Label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.skyneT_Label4.GradiantColor = false;
-            this.skyneT_Label4.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
-            this.skyneT_Label4.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
-            this.skyneT_Label4.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.skyneT_Label4.Location = new System.Drawing.Point(64, 113);
-            this.skyneT_Label4.Name = "skyneT_Label4";
-            this.skyneT_Label4.Size = new System.Drawing.Size(284, 17);
-            this.skyneT_Label4.TabIndex = 8;
-            this.skyneT_Label4.Text = "Press INSERT button to capture mouse location";
-            this.skyneT_Label4.TextColor = System.Drawing.SystemColors.ControlText;
-            this.skyneT_Label4.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
+            this.LB_Capture.AutoSize = true;
+            this.LB_Capture.ChangeColor = false;
+            this.LB_Capture.Font = new System.Drawing.Font("Segoe UI Emoji", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Capture.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.LB_Capture.GradiantColor = false;
+            this.LB_Capture.GradiantColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(98)))), ((int)(((byte)(255)))));
+            this.LB_Capture.GradiantColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(92)))), ((int)(((byte)(135)))));
+            this.LB_Capture.GradiantMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+            this.LB_Capture.Location = new System.Drawing.Point(64, 113);
+            this.LB_Capture.Name = "LB_Capture";
+            this.LB_Capture.Size = new System.Drawing.Size(284, 17);
+            this.LB_Capture.TabIndex = 8;
+            this.LB_Capture.Text = "Press INSERT button to capture mouse location";
+            this.LB_Capture.TextColor = System.Drawing.SystemColors.ControlText;
+            this.LB_Capture.TextColor_MouseHover = System.Drawing.SystemColors.ControlText;
             // 
             // LB_CurrentLocation
             // 
@@ -214,9 +214,9 @@ namespace SKYNET
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(393, 253);
             this.Controls.Add(this.LB_CurrentLocation);
-            this.Controls.Add(this.skyneT_Label4);
-            this.Controls.Add(this.skyneT_Label3);
-            this.Controls.Add(this.skyneT_Label2);
+            this.Controls.Add(this.LB_Capture);
+            this.Controls.Add(this.LB_Stop);
+            this.Controls.Add(this.LB_Start);
             this.Controls.Add(this.skyneT_Label1);
             this.Controls.Add(this.LB_Tittle);
             this.Controls.Add(this.BT_Settings);
@@ -224,6 +224,7 @@ namespace SKYNET
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.PN_Top.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -238,9 +239,9 @@ namespace SKYNET
         private Controls.SKYNET_Button BT_Settings;
         private Controls.SKYNET_Label LB_Tittle;
         private Controls.SKYNET_Label skyneT_Label1;
-        private Controls.SKYNET_Label skyneT_Label2;
-        private Controls.SKYNET_Label skyneT_Label3;
-        private Controls.SKYNET_Label skyneT_Label4;
+        private Controls.SKYNET_Label LB_Start;
+        private Controls.SKYNET_Label LB_Stop;
+        private Controls.SKYNET_Label LB_Capture;
         private Controls.SKYNET_Label LB_CurrentLocation;
     }
 }

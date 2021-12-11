@@ -31,12 +31,22 @@ namespace SKYNET
             _timer = new System.Timers.Timer();
             Settings = new Settings();
             Settings.Load();
+
+            ShowSettings();
         }
+
+        private void ShowSettings()
+        {
+            LB_Capture.Text = $"Press {Settings.Capture} button to capture mouse location";
+            LB_Start.Text = $"Press {Settings.Start} button to start";
+            LB_Stop.Text = $"Press {Settings.Stop} button to stop";
+        }
+
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             LeftMouseClick(X, Y);
 
-            _timer.Interval = 3000;
+            _timer.Interval = Settings.Seconds * 1000;
             _timer.Start();
         }
 
@@ -83,20 +93,20 @@ namespace SKYNET
 
         private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
         {
-            if (key == KeyboardHook.VKeys.INSERT)
+            if ((int)key == (int)Settings.Capture)
             {
                 GetCursorPos(out POINT p);
                 X = p.X;
                 Y = p.Y;
                 LB_CurrentLocation.Text = $"Current location (X:{X} Y:{Y})";
             }
-            else if (key == KeyboardHook.VKeys.HOME)
+            else if ((int)key == (int)Settings.Start)
             {
                 _timer.AutoReset = false;
                 _timer.Elapsed += _timer_Elapsed;
                 _timer.Start();
             }
-            else if (key == KeyboardHook.VKeys.END)
+            else if ((int)key == (int)Settings.Stop)
             {
                 _timer.Stop();
             }
@@ -115,6 +125,11 @@ namespace SKYNET
         private void BT_Settings_Click(object sender, EventArgs e)
         {
             new frmSettings().ShowDialog();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Save();
         }
     }
 }
