@@ -83,8 +83,8 @@
     <Compile Include="GUI\frmBase.designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="KeyboardHook\KeyboardHook.cs" />
-    <Compile Include="KeyboardHook\MouseHook.cs" />
+    <Compile Include="Hook\KeyboardHook.cs" />
+    <Compile Include="Hook\MouseHook.cs" />
     <Compile Include="modCommon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

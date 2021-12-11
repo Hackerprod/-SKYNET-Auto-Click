@@ -9,8 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using GlobalLowLevelHooks;
 using SKYNET.GUI;
+using SKYNET.Hook;
 
 namespace SKYNET
 {
@@ -21,6 +21,8 @@ namespace SKYNET
         private int X;
         private int Y;
         public static Settings Settings;
+        public static bool SettingsMode;
+
 
         public frmMain()
         {
@@ -37,52 +39,18 @@ namespace SKYNET
 
         private void ShowSettings()
         {
-            LB_Capture.Text = $"Press {Settings.Capture} button to capture mouse location";
-            LB_Start.Text = $"Press {Settings.Start} button to start";
-            LB_Stop.Text = $"Press {Settings.Stop} button to stop";
+            LB_Capture.Text = $"Press {Settings.Capture.ToString().ToUpper()} button to capture mouse location";
+            LB_Start.Text = $"Press {Settings.Start.ToString().ToUpper()} button to start";
+            LB_Stop.Text = $"Press {Settings.Stop.ToString().ToUpper()} button to stop";
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            LeftMouseClick(X, Y);
+            MouseHook.LeftMouseClick(X, Y);
 
             _timer.Interval = Settings.Seconds * 1000;
             _timer.Start();
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int X;
-            public int Y;
-
-            public static implicit operator Point(POINT point)
-            {
-                return new Point(point.X, point.Y);
-            }
-        }
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out POINT lpPoint);
-
-        //Esto reemplaza a Cursor.Position en WinForms
-        [DllImport("user32.dll")]
-        static extern bool SetCursorPos(int x, int y);
-
-        [DllImport("user32.dll")]
-        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
-
-        public const int MOUSEEVENTF_LEFTDOWN = 0x02;
-        public const int MOUSEEVENTF_LEFTUP = 0x04;
-
-        public static bool SettingsMode { get; internal set; }
-
-        //Esto simula un click con el botón izquierdo del ratón
-        public static void LeftMouseClick(int xpos, int ypos)
-        {
-            SetCursorPos(xpos, ypos);
-            mouse_event(MOUSEEVENTF_LEFTDOWN, xpos, ypos, 0, 0);
-            mouse_event(MOUSEEVENTF_LEFTUP, xpos, ypos, 0, 0);
-        }
+        }        
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -93,9 +61,11 @@ namespace SKYNET
 
         private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
         {
+            if (SettingsMode) return;
+
             if ((int)key == (int)Settings.Capture)
             {
-                GetCursorPos(out POINT p);
+                MouseHook.GetCursorPos(out MouseHook.POINT p);
                 X = p.X;
                 Y = p.Y;
                 LB_CurrentLocation.Text = $"Current location (X:{X} Y:{Y})";
@@ -124,7 +94,9 @@ namespace SKYNET
 
         private void BT_Settings_Click(object sender, EventArgs e)
         {
+            SettingsMode = true;
             new frmSettings().ShowDialog();
+            SettingsMode = false;
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

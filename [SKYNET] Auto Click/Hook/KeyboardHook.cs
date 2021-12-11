@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace GlobalLowLevelHooks
+namespace SKYNET.Hook
 {
     /// <summary>
     /// Class for intercepting low level keyboard hooks
