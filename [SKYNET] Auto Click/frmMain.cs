@@ -95,8 +95,10 @@ namespace SKYNET
         private void BT_Settings_Click(object sender, EventArgs e)
         {
             SettingsMode = true;
+            Visible = false;
             new frmSettings().ShowDialog();
             SettingsMode = false;
+            Visible = true;
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

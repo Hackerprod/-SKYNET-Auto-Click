@@ -77,6 +77,12 @@
     <Compile Include="GUI\Controls\SKYNET_MinimizeBox.designer.cs">
       <DependentUpon>SKYNET_MinimizeBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\SKYNET_TextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\SKYNET_TextBox.designer.cs">
+      <DependentUpon>SKYNET_TextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\SKYNET_MinimizeBox.resx">
       <DependentUpon>SKYNET_MinimizeBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\SKYNET_TextBox.resx">
+      <DependentUpon>SKYNET_TextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
@@ -132,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\minimise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\present_64px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
