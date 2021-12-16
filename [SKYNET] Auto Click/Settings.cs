@@ -13,11 +13,16 @@ namespace SKYNET
     {
         public int Seconds { get; set; }
         public Keys Capture { get; set; }
-        public Keys Start { get; set; }
-        public Keys Stop { get; set; }
+        public Keys StartClickBucle { get; set; }
+        public Keys StopClickBucle { get; set; }
+        public Keys StartMacroRecording { get; set; }
+        public Keys StopMacroRecording { get; set; }
+        public Keys PlayRecordedMacro { get; set; }
+        public Keys StopRecordedMacro { get; set; }
+
 
         ///////////////////////////////////////////////////////////////////
-        
+
         private RegistryKey Registry { get; set; }
         private string SubKey = @"SOFTWARE\SKYNET\[SKYNET] Auto Click\";
 
@@ -29,9 +34,13 @@ namespace SKYNET
                 Microsoft.Win32.Registry.CurrentUser.CreateSubKey(SubKey);
 
                 Capture = Keys.Insert;
-                Start = Keys.Home;
-                Stop = Keys.End;
+                StartClickBucle = Keys.Home;
+                StopClickBucle = Keys.End;
                 Seconds = 5;
+                StartMacroRecording = Keys.F1;
+                StopMacroRecording = Keys.F2;
+                PlayRecordedMacro = Keys.F3;
+                StopRecordedMacro = Keys.F4;
 
                 Save();
             }
@@ -48,17 +57,25 @@ namespace SKYNET
 
                     Settings  s = new JavaScriptSerializer().Deserialize<Settings>(JSON);
                     Capture = s.Capture;
-                    Start   = s.Start;
-                    Stop    = s.Stop;
+                    StartClickBucle   = s.StartClickBucle;
+                    StopClickBucle    = s.StopClickBucle;
                     Seconds = s.Seconds;
+                    StartMacroRecording = s.StartMacroRecording;
+                    StopMacroRecording = s.StopMacroRecording;
+                    PlayRecordedMacro = s.PlayRecordedMacro;
+                    StopRecordedMacro = s.StopRecordedMacro;
                 }
             }
             catch 
             {
                 Capture = Keys.Insert;
-                Start = Keys.Home;
-                Stop = Keys.End;
+                StartClickBucle = Keys.Home;
+                StopClickBucle = Keys.End;
                 Seconds = 5;
+                StartMacroRecording = Keys.F1;
+                StopMacroRecording = Keys.F2;
+                PlayRecordedMacro = Keys.F3;
+                StopRecordedMacro = Keys.F4;
             }
         }
 
