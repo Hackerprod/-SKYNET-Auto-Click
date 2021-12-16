@@ -1,4 +1,7 @@
 # [SKYNET] Auto Click
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Hackerprod/-SKYNET-Auto-Click?style=plastic)
+![GitHub all releases](https://img.shields.io/github/downloads/Hackerprod/-SKYNET-Auto-Click/total?style=plastic)
+![GitHub](https://img.shields.io/github/license/Hackerprod/-SKYNET-Auto-Click?style=plastic)
 
 [SKYNET] Auto Click is an application to automate the mause and keyboard events 
 
