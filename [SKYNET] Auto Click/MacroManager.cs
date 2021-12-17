@@ -40,7 +40,11 @@ namespace SKYNET
             Hook.LeftButtonUp += Hook_LeftButtonUp;   
             Hook.RightButtonDown += Hook_RightButtonDown;
             Hook.RightButtonUp += Hook_RightButtonUp;
+            Hook.MiddleButtonDown += Hook_MiddleButtonDown;
+            Hook.MiddleButtonUp += Hook_MiddleButtonUp;
             Hook.DoubleClick += Hook_DoubleClick;
+            Hook.GamerButtonDown += Hook_GamerButtonDown;
+            Hook.GamerButtonUp += Hook_GamerButtonUp;
 
             keyboardHook = new KeyboardHook();
             keyboardHook.KeyDown += keyboardHook_KeyDown;
@@ -58,23 +62,39 @@ namespace SKYNET
 
         private void Hook_LeftButtonDown(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            currentClicked = MouseEvents.LeftDown;
+            currentClicked = MouseEvents.LEFTDOWN;
         }
         private void Hook_LeftButtonUp(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            currentClicked = MouseEvents.LeftUp;
+            currentClicked = MouseEvents.LEFTUP;
         }
         private void Hook_RightButtonDown(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            currentClicked = MouseEvents.RightDown;
+            currentClicked = MouseEvents.RIGHTDOWN;
         }
         private void Hook_RightButtonUp(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            currentClicked = MouseEvents.RightUp;
+            currentClicked = MouseEvents.RIGHTUP;
+        }
+        private void Hook_MiddleButtonDown(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        {
+            currentClicked = MouseEvents.MIDDLEDOWN;
+        }
+        private void Hook_MiddleButtonUp(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        {
+            currentClicked = MouseEvents.MIDDLEUP;
+        }
+        private void Hook_GamerButtonUp(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        {
+            currentClicked = MouseEvents.XDOWN;
+        }
+        private void Hook_GamerButtonDown(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        {
+            currentClicked = MouseEvents.XUP;
         }
         private void Hook_DoubleClick(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            currentClicked = MouseEvents.LeftDoubleClick;
+            //currentClicked = MouseEvents.l;
         }
         private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
         {
@@ -140,20 +160,23 @@ namespace SKYNET
                     MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
-                        case MouseEvents.LeftDown:
-                            MouseHelper.SetClick(MouseEvents.LeftDown, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.LEFTDOWN:
+                            MouseHelper.SetClick(MouseEvents.LEFTDOWN, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.LeftUp:
-                            MouseHelper.SetClick(MouseEvents.LeftUp, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.LEFTUP:
+                            MouseHelper.SetClick(MouseEvents.LEFTUP, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.RightDown:
-                            MouseHelper.SetClick(MouseEvents.RightDown, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.RIGHTDOWN:
+                            MouseHelper.SetClick(MouseEvents.RIGHTDOWN, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.RightUp:
-                            MouseHelper.SetClick(MouseEvents.RightUp, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.RIGHTUP:
+                            MouseHelper.SetClick(MouseEvents.RIGHTUP, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.LeftDoubleClick:
-                            MouseHelper.SetDoubleClick(Event.Point.X, Event.Point.Y);
+                        case MouseEvents.MIDDLEDOWN:
+                            MouseHelper.SetClick(MouseEvents.MIDDLEDOWN, Event.Point.X, Event.Point.Y);
+                            break;
+                        case MouseEvents.MIDDLEUP:
+                            MouseHelper.SetClick(MouseEvents.MIDDLEUP, Event.Point.X, Event.Point.Y);
                             break;
                     }
                     if (Event.Key != null)
@@ -168,20 +191,23 @@ namespace SKYNET
                     MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
-                        case MouseEvents.LeftDown:
-                            MouseHelper.SetClick(MouseEvents.LeftDown, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.LEFTDOWN:
+                            MouseHelper.SetClick(MouseEvents.LEFTDOWN, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.LeftUp:
-                            MouseHelper.SetClick(MouseEvents.LeftUp, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.LEFTUP:
+                            MouseHelper.SetClick(MouseEvents.LEFTUP, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.RightDown:
-                            MouseHelper.SetClick(MouseEvents.RightDown, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.RIGHTDOWN:
+                            MouseHelper.SetClick(MouseEvents.RIGHTDOWN, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.RightUp:
-                            MouseHelper.SetClick(MouseEvents.RightUp, Event.Point.X, Event.Point.Y);
+                        case MouseEvents.RIGHTUP:
+                            MouseHelper.SetClick(MouseEvents.RIGHTUP, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.LeftDoubleClick:
-                            MouseHelper.SetDoubleClick(Event.Point.X, Event.Point.Y);
+                        case MouseEvents.MIDDLEDOWN:
+                            MouseHelper.SetClick(MouseEvents.MIDDLEDOWN, Event.Point.X, Event.Point.Y);
+                            break;
+                        case MouseEvents.MIDDLEUP:
+                            MouseHelper.SetClick(MouseEvents.MIDDLEUP, Event.Point.X, Event.Point.Y);
                             break;
                     }
                     if (Event.Key != null)

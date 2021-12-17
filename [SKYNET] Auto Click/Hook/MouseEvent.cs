@@ -46,10 +46,17 @@ namespace SKYNET.Hook
     public enum MouseEvents
     {
         None = 0,
-        LeftDown = 0x0002,
-        LeftUp = 0x0004,
-        RightDown = 0x0008,
-        RightUp = 0x0010,
-        LeftDoubleClick = 0x0203
+        ABSOLUTE = 0x8000,
+        LEFTDOWN = 0x0002,
+        LEFTUP = 0x0004,
+        MIDDLEDOWN = 0x0020,
+        MIDDLEUP = 0x0040,
+        MOVE = 0x0001,
+        RIGHTDOWN = 0x0008,
+        RIGHTUP = 0x0010,
+        XDOWN = 0x0080,
+        XUP = 0x0100,
+        WHEEL = 0x0800,
+        HWHEEL = 0x01000
     }
 }

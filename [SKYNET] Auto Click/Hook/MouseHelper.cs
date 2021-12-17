@@ -40,9 +40,9 @@ namespace SKYNET.Hook
                 SetCursorPos(x, y);
             }
 
-            mouse_event((int)MouseEvents.LeftDown, x, y, 0, 0);
+            mouse_event((int)MouseEvents.LEFTDOWN, x, y, 0, 0);
             Thread.Sleep(29);
-            mouse_event((int)MouseEvents.LeftUp, x, y, 0, 0);
+            mouse_event((int)MouseEvents.LEFTUP, x, y, 0, 0);
         }
 
         public static void RightClick(int x, int y, bool move = false)
@@ -52,9 +52,9 @@ namespace SKYNET.Hook
                 SetCursorPos(x, y);
             }
 
-            mouse_event((int)MouseEvents.RightDown, x, y, 0, 0);
+            mouse_event((int)MouseEvents.RIGHTDOWN, x, y, 0, 0);
             Thread.Sleep(29);
-            mouse_event((int)MouseEvents.RightUp, x, y, 0, 0);
+            mouse_event((int)MouseEvents.RIGHTUP, x, y, 0, 0);
         }
 
     }
