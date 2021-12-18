@@ -45,6 +45,7 @@ namespace SKYNET
             Hook.DoubleClick += Hook_DoubleClick;
             Hook.GamerButtonDown += Hook_GamerButtonDown;
             Hook.GamerButtonUp += Hook_GamerButtonUp;
+            Hook.MouseWheel += Hook_MouseWheel;
 
             keyboardHook = new KeyboardHook();
             keyboardHook.KeyDown += keyboardHook_KeyDown;
@@ -60,39 +61,52 @@ namespace SKYNET
             currentClicked = MouseEvents.None;
         }
 
-        private void Hook_LeftButtonDown(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        private void Hook_MouseWheel(object sender, MOUSEINPUT e)
+        {
+            if (e.mouseData == 7864320)
+            {
+                currentClicked = MouseEvents.WHEEL;
+            }
+            else if (e.mouseData == 4287102976)
+            {
+                currentClicked = MouseEvents.HWHEEL;
+            }
+            //frmMain.frm.LB_Tittle.Text = e.mouseData.ToString();
+        }
+
+        private void Hook_LeftButtonDown(object obj, MOUSEINPUT mouseStruct)
         {
             currentClicked = MouseEvents.LEFTDOWN;
         }
-        private void Hook_LeftButtonUp(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        private void Hook_LeftButtonUp(object obj, MOUSEINPUT mouseStruct)
         {
             currentClicked = MouseEvents.LEFTUP;
         }
-        private void Hook_RightButtonDown(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        private void Hook_RightButtonDown(object obj, MOUSEINPUT mouseStruct)
         {
             currentClicked = MouseEvents.RIGHTDOWN;
         }
-        private void Hook_RightButtonUp(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        private void Hook_RightButtonUp(object obj, MOUSEINPUT mouseStruct)
         {
             currentClicked = MouseEvents.RIGHTUP;
         }
-        private void Hook_MiddleButtonDown(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        private void Hook_MiddleButtonDown(object sender, MOUSEINPUT e)
         {
             currentClicked = MouseEvents.MIDDLEDOWN;
         }
-        private void Hook_MiddleButtonUp(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        private void Hook_MiddleButtonUp(object sender, MOUSEINPUT e)
         {
             currentClicked = MouseEvents.MIDDLEUP;
         }
-        private void Hook_GamerButtonUp(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        private void Hook_GamerButtonUp(object sender, MOUSEINPUT e)
         {
             currentClicked = MouseEvents.XDOWN;
         }
-        private void Hook_GamerButtonDown(object sender, MouseHook.MSLLHOOKSTRUCT e)
+        private void Hook_GamerButtonDown(object sender, MOUSEINPUT e)
         {
             currentClicked = MouseEvents.XUP;
         }
-        private void Hook_DoubleClick(object obj, MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        private void Hook_DoubleClick(object obj, MOUSEINPUT mouseStruct)
         {
             //currentClicked = MouseEvents.l;
         }
@@ -140,17 +154,23 @@ namespace SKYNET
         {
             if (isRecording)
             {
-                MouseHelper.GetCursorPos(out POINT p);
-                var Event = new MouseEvent(p, currentClicked);
-                if (currentKey != null)
+                try
                 {
-                    Event.Key = currentKey;
-                    currentKey = null;
+                    MouseHelper.GetCursorPos(out POINT p);
+                    var Event = new MouseEvent(p, currentClicked);
+                    if (currentKey != null)
+                    {
+                        Event.Key = currentKey;
+                        currentKey = null;
+                    }
+                    Record.Add(Step, Event);
+                    currentClicked = MouseEvents.None;
+                    Step += 1;
+                    frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(Step * 10);
                 }
-                Record.Add(Step, Event);
-                currentClicked = MouseEvents.None;
-                Step += 1;
-                frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(Step * 10);
+                catch 
+                {
+                }
             }
             else
             {
@@ -177,6 +197,12 @@ namespace SKYNET
                             break;
                         case MouseEvents.MIDDLEUP:
                             MouseHelper.SetClick(MouseEvents.MIDDLEUP, Event.Point.X, Event.Point.Y);
+                            break;
+                        case MouseEvents.WHEEL:
+                            MouseHelper.SetWheel(MouseEvents.WHEEL, Event.Point.X, Event.Point.Y);
+                            break;
+                        case MouseEvents.HWHEEL:
+                            MouseHelper.SetWheel(MouseEvents.HWHEEL, Event.Point.X, Event.Point.Y);
                             break;
                     }
                     if (Event.Key != null)

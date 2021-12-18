@@ -217,7 +217,6 @@ namespace SKYNET
                 if (isRecording) return;
                 isRecording = true;
                 Macro.StartRecording();
-                WindowState = FormWindowState.Minimized;
                 macroStatus = MacroStatus.RecordingMacro;
                 LB_MacroStatus.Text = "Recording";
                 LB_MacroStatus.ForeColor = Color.DodgerBlue;
@@ -228,7 +227,6 @@ namespace SKYNET
                 if (macroStatus == MacroStatus.RecordingMacro)
                 {
                     Macro.StopRecording();
-                    WindowState = FormWindowState.Normal;
                     macroStatus = MacroStatus.Stoped;
                     LB_MacroName.Text = "Macro_" + DateTime.Now.Ticks;
                     LB_MacroDuration.Text = $"{modCommon.GetTime(Macro.Duration())}";
@@ -245,7 +243,6 @@ namespace SKYNET
                     return;
                 }
                 Macro.StartMacro();
-                WindowState = FormWindowState.Minimized;
                 macroStatus = MacroStatus.PlayingMacro;
                 LB_MacroStatus.Text = "Running";
                 LB_MacroStatus.ForeColor = Color.Lime;
@@ -256,7 +253,6 @@ namespace SKYNET
                 if (macroStatus == MacroStatus.PlayingMacro)
                 {
                     Macro.StopMacro();
-                    WindowState = FormWindowState.Normal;
                     macroStatus = MacroStatus.Stoped;
                     LB_MacroStatus.Text = "Stoped";
                     LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);

@@ -57,5 +57,10 @@ namespace SKYNET.Hook
             mouse_event((int)MouseEvents.RIGHTUP, x, y, 0, 0);
         }
 
+        internal static void SetWheel(MouseEvents wHEEL, int x, int y)
+        {
+            //frmMain.frm.LB_Tittle.Text = wHEEL.ToString();
+            mouse_event((int)wHEEL, x, y, 0, 0);
+        }
     }
 }

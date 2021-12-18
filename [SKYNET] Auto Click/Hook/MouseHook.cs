@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using SKYNET.Hook;
 
 namespace SKYNET
 {
@@ -14,17 +15,17 @@ namespace SKYNET
         private IntPtr hookID = IntPtr.Zero;
         private const int WH_MOUSE_LL = 14;
 
-        public event EventHandler<MSLLHOOKSTRUCT> LeftButtonDown;
-        public event EventHandler<MSLLHOOKSTRUCT> LeftButtonUp;
-        public event EventHandler<MSLLHOOKSTRUCT> RightButtonDown;
-        public event EventHandler<MSLLHOOKSTRUCT> RightButtonUp;
-        public event EventHandler<MSLLHOOKSTRUCT> MouseMove;
-        public event EventHandler<MSLLHOOKSTRUCT> MouseWheel;
-        public event EventHandler<MSLLHOOKSTRUCT> DoubleClick;
-        public event EventHandler<MSLLHOOKSTRUCT> MiddleButtonDown;
-        public event EventHandler<MSLLHOOKSTRUCT> MiddleButtonUp;
-        public event EventHandler<MSLLHOOKSTRUCT> GamerButtonDown;
-        public event EventHandler<MSLLHOOKSTRUCT> GamerButtonUp;
+        public event EventHandler<MOUSEINPUT> LeftButtonDown;
+        public event EventHandler<MOUSEINPUT> LeftButtonUp;
+        public event EventHandler<MOUSEINPUT> RightButtonDown;
+        public event EventHandler<MOUSEINPUT> RightButtonUp;
+        public event EventHandler<MOUSEINPUT> MouseMove;
+        public event EventHandler<MOUSEINPUT> MouseWheel;
+        public event EventHandler<MOUSEINPUT> DoubleClick;
+        public event EventHandler<MOUSEINPUT> MiddleButtonDown;
+        public event EventHandler<MOUSEINPUT> MiddleButtonUp;
+        public event EventHandler<MOUSEINPUT> GamerButtonDown;
+        public event EventHandler<MOUSEINPUT> GamerButtonUp;
 
 
         public void Install()
@@ -58,40 +59,43 @@ namespace SKYNET
             // parse system messages
             if (nCode >= 0)
             {
+                MOUSEINPUT MOUSEINPUT = Marshal.PtrToStructure<MOUSEINPUT>(lParam);
+                frmMain.frm.LB_Tittle.Text = MOUSEINPUT.dwFlags.ToString();
+
                 switch ((MouseMessages)wParam)
                 {
                     case MouseMessages.WM_LBUTTONDOWN:
-                        LeftButtonDown?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        LeftButtonDown?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_LBUTTONUP:
-                        LeftButtonUp?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        LeftButtonUp?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_MOUSEMOVE:
-                        MouseMove?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        MouseMove?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_MOUSEWHEEL:
-                        MouseWheel?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        MouseWheel?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_RBUTTONDOWN:
-                        RightButtonDown?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        RightButtonDown?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_RBUTTONUP:
-                        RightButtonUp?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        RightButtonUp?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_LBUTTONDBLCLK:
-                        DoubleClick?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        DoubleClick?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_MBUTTONDOWN:
-                        MiddleButtonDown?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        MiddleButtonDown?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_MBUTTONUP:
-                        MiddleButtonUp?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        MiddleButtonUp?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_GBUTTONDOWN:
-                        GamerButtonDown?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        GamerButtonDown?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_GBUTTONUP:
-                        GamerButtonUp?.Invoke(this, (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT)));
+                        GamerButtonUp?.Invoke(this, MOUSEINPUT);
                         break;
                     default:
                         modCommon.Show(wParam);
@@ -118,23 +122,6 @@ namespace SKYNET
             WM_GBUTTONUP = 524
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int x;
-            public int y;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct MSLLHOOKSTRUCT
-        {
-            public POINT pt;
-            public uint mouseData;
-            public uint flags;
-            public uint time;
-            public IntPtr dwExtraInfo;
-        }
-
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr SetWindowsHookEx(int idHook, MouseHookHandler lpfn, IntPtr hMod, uint dwThreadId);
 
@@ -147,5 +134,24 @@ namespace SKYNET
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        [Flags]
+        public enum MOUSEEVENTF : uint
+        {
+            MOUSEEVENTF_ABSOLUTE = 0x8000,
+            MOUSEEVENTF_HWHEEL = 0x01000,
+            MOUSEEVENTF_MOVE = 0x0001,
+            MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000,
+            MOUSEEVENTF_LEFTDOWN = 0x0002,
+            MOUSEEVENTF_LEFTUP = 0x0004,
+            MOUSEEVENTF_RIGHTDOWN = 0x0008,
+            MOUSEEVENTF_RIGHTUP = 0x0010,
+            MOUSEEVENTF_MIDDLEDOWN = 0x0020,
+            MOUSEEVENTF_MIDDLEUP = 0x0040,
+            MOUSEEVENTF_VIRTUALDESK = 0x4000,
+            MOUSEEVENTF_WHEEL = 0x0800,
+            MOUSEEVENTF_XDOWN = 0x0080,
+            MOUSEEVENTF_XUP = 0x0100,
+        }
     }
 }

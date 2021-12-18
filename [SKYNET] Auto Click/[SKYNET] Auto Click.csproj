@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -98,6 +99,7 @@
     <Compile Include="Hook\MouseHelper.cs" />
     <Compile Include="Hook\MouseHook.cs" />
     <Compile Include="Hook\KeyPressed.cs" />
+    <Compile Include="Hook\MOUSEINPUT.cs" />
     <Compile Include="MacroManager.cs" />
     <Compile Include="modCommon.cs" />
     <Compile Include="Program.cs" />
