@@ -15,18 +15,7 @@ namespace SKYNET
         private IntPtr hookID = IntPtr.Zero;
         private const int WH_MOUSE_LL = 14;
 
-        public event EventHandler<MOUSEINPUT> LeftButtonDown;
-        public event EventHandler<MOUSEINPUT> LeftButtonUp;
-        public event EventHandler<MOUSEINPUT> RightButtonDown;
-        public event EventHandler<MOUSEINPUT> RightButtonUp;
-        public event EventHandler<MOUSEINPUT> MouseMove;
-        public event EventHandler<MOUSEINPUT> MouseWheel;
-        public event EventHandler<MOUSEINPUT> DoubleClick;
-        public event EventHandler<MOUSEINPUT> MiddleButtonDown;
-        public event EventHandler<MOUSEINPUT> MiddleButtonUp;
-        public event EventHandler<MOUSEINPUT> GamerButtonDown;
-        public event EventHandler<MOUSEINPUT> GamerButtonUp;
-
+        public event EventHandler<MouseEvent> OnMouseEvent;
 
         public void Install()
         {
@@ -56,65 +45,17 @@ namespace SKYNET
 
         private IntPtr HookFunc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            frmMain.frm.LB_Tittle.Text = ((int)wParam).ToString();
+            //frmMain.frm.LB_Tittle.Text = ((int)wParam).ToString();
             // parse system messages
             if (nCode >= 0)
             {
                 MOUSEINPUT MOUSEINPUT = Marshal.PtrToStructure<MOUSEINPUT>(lParam);
-                switch ((MouseMessages)wParam)
+                if ((IN_MouseMessages)wParam != IN_MouseMessages.WM_MOUSEMOVE)
                 {
-                    case MouseMessages.WM_LBUTTONDOWN:
-                        LeftButtonDown?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_LBUTTONUP:
-                        LeftButtonUp?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_MOUSEMOVE:
-                        MouseMove?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_MOUSEWHEEL:
-                        MouseWheel?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_RBUTTONDOWN:
-                        RightButtonDown?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_RBUTTONUP:
-                        RightButtonUp?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_MBUTTONDOWN:
-                        MiddleButtonDown?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_MBUTTONUP:
-                        MiddleButtonUp?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_GBUTTONDOWN:
-                        GamerButtonDown?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_GBUTTONUP:
-                        GamerButtonUp?.Invoke(this, MOUSEINPUT);
-                        break;
-                    default:
-                        modCommon.Show(wParam);
-                        break;
+                    OnMouseEvent?.Invoke(this, new MouseEvent((IN_MouseMessages)wParam, MOUSEINPUT));
                 }
-
             }
             return CallNextHookEx(hookID, nCode, wParam, lParam);
-        }
-
-
-        public enum MouseMessages
-        {
-            WM_LBUTTONDOWN = 513,
-            WM_LBUTTONUP = 514,
-            WM_MOUSEMOVE = 512,
-            WM_MOUSEWHEEL = 522,
-            WM_RBUTTONDOWN = 516,
-            WM_RBUTTONUP = 517,
-            WM_MBUTTONDOWN = 519,
-            WM_MBUTTONUP = 520,
-            WM_GBUTTONDOWN = 523,
-            WM_GBUTTONUP = 524
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -130,23 +71,59 @@ namespace SKYNET
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string lpModuleName);
 
-        [Flags]
-        public enum MOUSEEVENTF : uint
+        public class MouseEvent
         {
-            MOUSEEVENTF_ABSOLUTE = 0x8000,
-            MOUSEEVENTF_HWHEEL = 0x01000,
-            MOUSEEVENTF_MOVE = 0x0001,
-            MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000,
-            MOUSEEVENTF_LEFTDOWN = 0x0002,
-            MOUSEEVENTF_LEFTUP = 0x0004,
-            MOUSEEVENTF_RIGHTDOWN = 0x0008,
-            MOUSEEVENTF_RIGHTUP = 0x0010,
-            MOUSEEVENTF_MIDDLEDOWN = 0x0020,
-            MOUSEEVENTF_MIDDLEUP = 0x0040,
-            MOUSEEVENTF_VIRTUALDESK = 0x4000,
-            MOUSEEVENTF_WHEEL = 0x0800,
-            MOUSEEVENTF_XDOWN = 0x0080,
-            MOUSEEVENTF_XUP = 0x0100,
+            public MouseMessages EventType { get; set; }
+            public MOUSEINPUT MouseInput { get; set; }
+
+            public MouseEvent(IN_MouseMessages msg, MOUSEINPUT input)
+            {
+                EventType = ParseType(msg);
+                MouseInput = input;
+            }
+
+            private MouseMessages ParseType(IN_MouseMessages msg)
+            {
+                var values = Enum.GetValues(typeof(MouseMessages));
+                foreach (var item in values)
+                {
+                    if (item.ToString() == msg.ToString())
+                    {
+                        return (MouseMessages)item;
+                    }
+                }
+                return MouseMessages.None;
+            }
         }
+    }
+    public enum IN_MouseMessages
+    {
+        WM_LBUTTONDOWN = 513,
+        WM_LBUTTONUP = 514,
+        WM_MOUSEMOVE = 512,
+        WM_MOUSEWHEEL = 522,
+        WM_RBUTTONDOWN = 516,
+        WM_RBUTTONUP = 517,
+        WM_MBUTTONDOWN = 519,
+        WM_MBUTTONUP = 520,
+        WM_GBUTTONDOWN = 523,
+        WM_GBUTTONUP = 524
+    }
+    public enum MouseMessages
+    {
+        None = 0,
+        ABSOLUTE = 0x8000,
+
+        WM_LBUTTONDOWN = 0x0002,
+        WM_LBUTTONUP = 0x0004,
+        WM_MOUSEMOVE = 0x0001,
+        WM_MOUSEWHEEL = 0x0800,
+        WM_MOUSEHWHEEL = 0x01000,
+        WM_RBUTTONDOWN = 0x0008,
+        WM_RBUTTONUP = 0x0010,
+        WM_MBUTTONDOWN = 0x0020,
+        WM_MBUTTONUP = 0x0040,
+        WM_GBUTTONDOWN = 0x0080,
+        WM_GBUTTONUP = 0x0100,
     }
 }

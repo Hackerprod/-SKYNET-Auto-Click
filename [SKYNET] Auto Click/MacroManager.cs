@@ -19,9 +19,9 @@ namespace SKYNET
         private System.Timers.Timer _timer;
         private bool isRecording;
         private int currentStep;
-        private MouseHook Hook;
-        private MouseEvents currentClicked;
+        private MouseMessages currentClicked;
         private KeyPressed currentKey;
+        private MouseHook MouseHook;
         private KeyboardHook keyboardHook;
         public bool HaveRecordedMacro 
         {
@@ -35,17 +35,8 @@ namespace SKYNET
         {
             Record = new Dictionary<int, MouseEvent>();
 
-            Hook = new MouseHook();
-            Hook.LeftButtonDown += Hook_LeftButtonDown;
-            Hook.LeftButtonUp += Hook_LeftButtonUp;   
-            Hook.RightButtonDown += Hook_RightButtonDown;
-            Hook.RightButtonUp += Hook_RightButtonUp;
-            Hook.MiddleButtonDown += Hook_MiddleButtonDown;
-            Hook.MiddleButtonUp += Hook_MiddleButtonUp;
-            Hook.DoubleClick += Hook_DoubleClick;
-            Hook.GamerButtonDown += Hook_GamerButtonDown;
-            Hook.GamerButtonUp += Hook_GamerButtonUp;
-            Hook.MouseWheel += Hook_MouseWheel;
+            MouseHook = new MouseHook();
+            MouseHook.OnMouseEvent += Hook_OnMouseEvent;
 
             keyboardHook = new KeyboardHook();
             keyboardHook.KeyDown += keyboardHook_KeyDown;
@@ -58,58 +49,28 @@ namespace SKYNET
 
             Step = 1;
             currentStep = 1;
-            currentClicked = MouseEvents.None;
+            currentClicked = MouseMessages.None;
+        }
+
+        private void Hook_OnMouseEvent(object sender, MouseHook.MouseEvent e)
+        {
+            currentClicked = e.EventType;
         }
 
         private void Hook_MouseWheel(object sender, MOUSEINPUT e)
         {
-            if (e.mouseData == 7864320)
-            {
-                currentClicked = MouseEvents.WHEEL;
-            }
-            else if (e.mouseData == 4287102976)
-            {
-                currentClicked = MouseEvents.HWHEEL;
-            }
+            //if (e.mouseData == 7864320)
+            //{
+            //    currentClicked = MouseMessages.WHEEL;
+            //}
+            //else if (e.mouseData == 4287102976)
+            //{
+            //    currentClicked = MouseMessages.HWHEEL;
+            //}
             //frmMain.frm.LB_Tittle.Text = e.mouseData.ToString();
         }
 
-        private void Hook_LeftButtonDown(object obj, MOUSEINPUT mouseStruct)
-        {
-            currentClicked = MouseEvents.LEFTDOWN;
-        }
-        private void Hook_LeftButtonUp(object obj, MOUSEINPUT mouseStruct)
-        {
-            currentClicked = MouseEvents.LEFTUP;
-        }
-        private void Hook_RightButtonDown(object obj, MOUSEINPUT mouseStruct)
-        {
-            currentClicked = MouseEvents.RIGHTDOWN;
-        }
-        private void Hook_RightButtonUp(object obj, MOUSEINPUT mouseStruct)
-        {
-            currentClicked = MouseEvents.RIGHTUP;
-        }
-        private void Hook_MiddleButtonDown(object sender, MOUSEINPUT e)
-        {
-            currentClicked = MouseEvents.MIDDLEDOWN;
-        }
-        private void Hook_MiddleButtonUp(object sender, MOUSEINPUT e)
-        {
-            currentClicked = MouseEvents.MIDDLEUP;
-        }
-        private void Hook_GamerButtonUp(object sender, MOUSEINPUT e)
-        {
-            currentClicked = MouseEvents.XDOWN;
-        }
-        private void Hook_GamerButtonDown(object sender, MOUSEINPUT e)
-        {
-            currentClicked = MouseEvents.XUP;
-        }
-        private void Hook_DoubleClick(object obj, MOUSEINPUT mouseStruct)
-        {
-            //currentClicked = MouseEvents.l;
-        }
+
         private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
         {
             currentKey = new KeyPressed((Keys)key, KeyAction.KeyDown);
@@ -125,8 +86,8 @@ namespace SKYNET
         }
         public void StartRecording()
         {
-            currentClicked = MouseEvents.None;
-            Hook.Install();
+            currentClicked = MouseMessages.None;
+            MouseHook.Install();
             keyboardHook.Install();
             Step = 1;
             isRecording = true;
@@ -135,9 +96,9 @@ namespace SKYNET
         }
         public void StopRecording()
         {
-            currentClicked = MouseEvents.None;
+            currentClicked = MouseMessages.None;
             _timer.Stop();
-            Hook.Uninstall();
+            MouseHook.Uninstall();
             keyboardHook.Uninstall();
         }
         public void StartMacro()
@@ -165,7 +126,7 @@ namespace SKYNET
                         currentKey = null;
                     }
                     Record.Add(Step, Event);
-                    currentClicked = MouseEvents.None;
+                    currentClicked = MouseMessages.None;
                     Step += 1;
                     frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(Step * 10);
                 }
@@ -181,29 +142,11 @@ namespace SKYNET
                     MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
-                        case MouseEvents.LEFTDOWN:
-                            MouseHelper.SetClick(MouseEvents.LEFTDOWN, Event.Point.X, Event.Point.Y);
+                        case MouseMessages.WM_MOUSEWHEEL:
+                            MouseHelper.SetWheel(MouseMessages.WM_MOUSEWHEEL, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.LEFTUP:
-                            MouseHelper.SetClick(MouseEvents.LEFTUP, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.RIGHTDOWN:
-                            MouseHelper.SetClick(MouseEvents.RIGHTDOWN, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.RIGHTUP:
-                            MouseHelper.SetClick(MouseEvents.RIGHTUP, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.MIDDLEDOWN:
-                            MouseHelper.SetClick(MouseEvents.MIDDLEDOWN, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.MIDDLEUP:
-                            MouseHelper.SetClick(MouseEvents.MIDDLEUP, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.WHEEL:
-                            MouseHelper.SetWheel(MouseEvents.WHEEL, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.HWHEEL:
-                            MouseHelper.SetWheel(MouseEvents.HWHEEL, Event.Point.X, Event.Point.Y);
+                        default:
+                            MouseHelper.SetClick(Event.Button, Event.Point.X, Event.Point.Y);
                             break;
                     }
                     if (Event.Key != null)
@@ -218,23 +161,11 @@ namespace SKYNET
                     MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
-                        case MouseEvents.LEFTDOWN:
-                            MouseHelper.SetClick(MouseEvents.LEFTDOWN, Event.Point.X, Event.Point.Y);
+                        case MouseMessages.WM_MOUSEWHEEL:
+                            MouseHelper.SetWheel(MouseMessages.WM_MOUSEWHEEL, Event.Point.X, Event.Point.Y);
                             break;
-                        case MouseEvents.LEFTUP:
-                            MouseHelper.SetClick(MouseEvents.LEFTUP, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.RIGHTDOWN:
-                            MouseHelper.SetClick(MouseEvents.RIGHTDOWN, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.RIGHTUP:
-                            MouseHelper.SetClick(MouseEvents.RIGHTUP, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.MIDDLEDOWN:
-                            MouseHelper.SetClick(MouseEvents.MIDDLEDOWN, Event.Point.X, Event.Point.Y);
-                            break;
-                        case MouseEvents.MIDDLEUP:
-                            MouseHelper.SetClick(MouseEvents.MIDDLEUP, Event.Point.X, Event.Point.Y);
+                        default:
+                            MouseHelper.SetClick(Event.Button, Event.Point.X, Event.Point.Y);
                             break;
                     }
                     if (Event.Key != null)

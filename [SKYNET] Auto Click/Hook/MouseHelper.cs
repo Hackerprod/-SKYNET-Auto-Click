@@ -18,7 +18,7 @@ namespace SKYNET.Hook
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
-        public static void SetClick(MouseEvents Event, int x, int y)
+        public static void SetClick(MouseMessages Event, int x, int y)
         {
             mouse_event((int)Event, x, y, 0, 0);
         }
@@ -40,9 +40,9 @@ namespace SKYNET.Hook
                 SetCursorPos(x, y);
             }
 
-            mouse_event((int)MouseEvents.LEFTDOWN, x, y, 0, 0);
+            mouse_event((int)MouseMessages.WM_LBUTTONDOWN, x, y, 0, 0);
             Thread.Sleep(29);
-            mouse_event((int)MouseEvents.LEFTUP, x, y, 0, 0);
+            mouse_event((int)MouseMessages.WM_LBUTTONUP, x, y, 0, 0);
         }
 
         public static void RightClick(int x, int y, bool move = false)
@@ -52,12 +52,12 @@ namespace SKYNET.Hook
                 SetCursorPos(x, y);
             }
 
-            mouse_event((int)MouseEvents.RIGHTDOWN, x, y, 0, 0);
+            mouse_event((int)MouseMessages.WM_RBUTTONDOWN, x, y, 0, 0);
             Thread.Sleep(29);
-            mouse_event((int)MouseEvents.RIGHTUP, x, y, 0, 0);
+            mouse_event((int)MouseMessages.WM_RBUTTONUP, x, y, 0, 0);
         }
 
-        internal static void SetWheel(MouseEvents wHEEL, int x, int y)
+        internal static void SetWheel(MouseMessages wHEEL, int x, int y)
         {
             //frmMain.frm.LB_Tittle.Text = wHEEL.ToString();
             mouse_event((int)wHEEL, x, y, 0, 0);
