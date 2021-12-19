@@ -57,20 +57,6 @@ namespace SKYNET
             currentClicked = e.EventType;
         }
 
-        private void Hook_MouseWheel(object sender, MOUSEINPUT e)
-        {
-            //if (e.mouseData == 7864320)
-            //{
-            //    currentClicked = MouseMessages.WHEEL;
-            //}
-            //else if (e.mouseData == 4287102976)
-            //{
-            //    currentClicked = MouseMessages.HWHEEL;
-            //}
-            //frmMain.frm.LB_Tittle.Text = e.mouseData.ToString();
-        }
-
-
         private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
         {
             currentKey = new KeyPressed((Keys)key, KeyAction.KeyDown);
@@ -163,8 +149,10 @@ namespace SKYNET
                     User32.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
+                        case MouseMessages.ScrollUp:
+                        case MouseMessages.ScrollDown:
                         case MouseMessages.WM_MOUSEWHEEL:
-                            MouseHelper.SetWheel(MouseMessages.WM_MOUSEWHEEL, Event.Point.X, Event.Point.Y);
+                            MouseHelper.SetWheel(Event.Button, Event.Point.X, Event.Point.Y);
                             break;
                         default:
                             MouseHelper.SetClick(Event.Button, Event.Point.X, Event.Point.Y);
@@ -184,17 +172,6 @@ namespace SKYNET
                 frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(currentStep * 10) + " / " + modCommon.GetTime(Step * 10);
             }
             _timer.Start();
-
-        }
-
-
-
-        void PressKey(Keys keyCode)
-        {
-            const int KEYEVENTF_EXTENDEDKEY = 0x1;
-            const int KEYEVENTF_KEYUP = 0x2;
-            User32.keybd_event((byte)keyCode, 0x45, KEYEVENTF_EXTENDEDKEY, 0);
-            User32.keybd_event((byte)keyCode, 0x45, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
         }
         private void PressKey(KeyPressed key)
         {

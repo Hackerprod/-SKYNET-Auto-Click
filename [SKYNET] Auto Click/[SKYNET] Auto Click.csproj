@@ -101,11 +101,11 @@
       <DependentUpon>frmMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="Hook\KeyboardHook.cs" />
-    <Compile Include="Hook\MouseEvent.cs" />
+    <Compile Include="Models\MouseEvent.cs" />
     <Compile Include="Hook\MouseHelper.cs" />
     <Compile Include="Hook\MouseHook.cs" />
-    <Compile Include="Hook\KeyPressed.cs" />
-    <Compile Include="Hook\MOUSEINPUT.cs" />
+    <Compile Include="Models\KeyPressed.cs" />
+    <Compile Include="Models\MOUSEINPUT.cs" />
     <Compile Include="MacroManager.cs" />
     <Compile Include="modCommon.cs" />
     <Compile Include="Models\User32.cs" />

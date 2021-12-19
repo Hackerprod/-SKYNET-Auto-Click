@@ -15,7 +15,6 @@ namespace SKYNET.Hook
         }
         public static void SetDoubleClick(int x, int y)
         {
-            //modCommon.Show("double");
             int LEFTDOWN = 0x02;
             int LEFTUP = 0x04;
             User32.mouse_event(LEFTDOWN | LEFTUP, x, y, 0, 0);
