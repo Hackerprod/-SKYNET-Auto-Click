@@ -59,8 +59,14 @@ namespace SKYNET.Hook
 
         internal static void SetWheel(MouseMessages wHEEL, int x, int y)
         {
-            //frmMain.frm.LB_Tittle.Text = wHEEL.ToString();
-            mouse_event((int)wHEEL, x, y, 0, 0);
+            if (wHEEL == MouseMessages.ScrollUp)
+            {
+                mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, 120, 0);
+            }
+            else if (wHEEL == MouseMessages.ScrollDown)
+            {
+                mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, -120, 0);
+            }
         }
     }
 }

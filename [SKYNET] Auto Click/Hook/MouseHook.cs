@@ -50,9 +50,16 @@ namespace SKYNET
             if (nCode >= 0)
             {
                 MOUSEINPUT MOUSEINPUT = Marshal.PtrToStructure<MOUSEINPUT>(lParam);
-                if ((IN_MouseMessages)wParam != IN_MouseMessages.WM_MOUSEMOVE)
+                switch ((IN_MouseMessages)wParam)
                 {
-                    OnMouseEvent?.Invoke(this, new MouseEvent((IN_MouseMessages)wParam, MOUSEINPUT));
+                    case IN_MouseMessages.WM_MOUSEMOVE:
+                        break;
+                    case IN_MouseMessages.WM_MOUSEWHEEL:
+                        OnMouseEvent?.Invoke(this, new MouseEvent((MouseMessages)MOUSEINPUT.mouseData, MOUSEINPUT));
+                        break;
+                    default:
+                        OnMouseEvent?.Invoke(this, new MouseEvent((IN_MouseMessages)wParam, MOUSEINPUT));
+                        break;
                 }
             }
             return CallNextHookEx(hookID, nCode, wParam, lParam);
@@ -79,6 +86,11 @@ namespace SKYNET
             public MouseEvent(IN_MouseMessages msg, MOUSEINPUT input)
             {
                 EventType = ParseType(msg);
+                MouseInput = input;
+            }
+            public MouseEvent(MouseMessages msg, MOUSEINPUT input)
+            {
+                EventType = msg;
                 MouseInput = input;
             }
 
@@ -125,5 +137,8 @@ namespace SKYNET
         WM_MBUTTONUP = 0x0040,
         WM_GBUTTONDOWN = 0x0080,
         WM_GBUTTONUP = 0x0100,
+
+        ScrollUp = 7864320,
+        ScrollDown = -7864320,
     }
 }

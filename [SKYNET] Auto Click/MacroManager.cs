@@ -142,8 +142,10 @@ namespace SKYNET
                     MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
+                        case MouseMessages.ScrollUp:
+                        case MouseMessages.ScrollDown:
                         case MouseMessages.WM_MOUSEWHEEL:
-                            MouseHelper.SetWheel(MouseMessages.WM_MOUSEWHEEL, Event.Point.X, Event.Point.Y);
+                            MouseHelper.SetWheel(Event.Button, Event.Point.X, Event.Point.Y);
                             break;
                         default:
                             MouseHelper.SetClick(Event.Button, Event.Point.X, Event.Point.Y);
