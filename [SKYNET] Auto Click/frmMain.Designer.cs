@@ -115,10 +115,9 @@ namespace SKYNET
             // 
             // LB_Tittle
             // 
-            this.LB_Tittle.AutoSize = true;
             this.LB_Tittle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Tittle.ForeColor = System.Drawing.Color.White;
-            this.LB_Tittle.Location = new System.Drawing.Point(23, 5);
+            this.LB_Tittle.Location = new System.Drawing.Point(23, 6);
             this.LB_Tittle.Name = "LB_Tittle";
             this.LB_Tittle.Size = new System.Drawing.Size(115, 15);
             this.LB_Tittle.TabIndex = 6;
@@ -649,7 +648,6 @@ namespace SKYNET
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmSettings_Load);
             this.PN_Top.ResumeLayout(false);
-            this.PN_Top.PerformLayout();
             this.PN_Capture.ResumeLayout(false);
             this.PN_StartBucle.ResumeLayout(false);
             this.PN_StopBucle.ResumeLayout(false);

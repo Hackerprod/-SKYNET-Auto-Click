@@ -56,12 +56,11 @@ namespace SKYNET
 
         private IntPtr HookFunc(int nCode, IntPtr wParam, IntPtr lParam)
         {
+            frmMain.frm.LB_Tittle.Text = ((int)wParam).ToString();
             // parse system messages
             if (nCode >= 0)
             {
                 MOUSEINPUT MOUSEINPUT = Marshal.PtrToStructure<MOUSEINPUT>(lParam);
-                frmMain.frm.LB_Tittle.Text = MOUSEINPUT.dwFlags.ToString();
-
                 switch ((MouseMessages)wParam)
                 {
                     case MouseMessages.WM_LBUTTONDOWN:
@@ -81,9 +80,6 @@ namespace SKYNET
                         break;
                     case MouseMessages.WM_RBUTTONUP:
                         RightButtonUp?.Invoke(this, MOUSEINPUT);
-                        break;
-                    case MouseMessages.WM_LBUTTONDBLCLK:
-                        DoubleClick?.Invoke(this, MOUSEINPUT);
                         break;
                     case MouseMessages.WM_MBUTTONDOWN:
                         MiddleButtonDown?.Invoke(this, MOUSEINPUT);
@@ -107,17 +103,16 @@ namespace SKYNET
         }
 
 
-        private enum MouseMessages
+        public enum MouseMessages
         {
-            WM_LBUTTONDOWN = 0x0201,
-            WM_LBUTTONUP = 0x0202,
-            WM_MOUSEMOVE = 0x0200,
-            WM_MOUSEWHEEL = 0x020A,
-            WM_RBUTTONDOWN = 0x0204,
-            WM_RBUTTONUP = 0x0205,
-            WM_LBUTTONDBLCLK = 0x0203,
-            WM_MBUTTONDOWN = 0x0207,
-            WM_MBUTTONUP = 0x0208,
+            WM_LBUTTONDOWN = 513,
+            WM_LBUTTONUP = 514,
+            WM_MOUSEMOVE = 512,
+            WM_MOUSEWHEEL = 522,
+            WM_RBUTTONDOWN = 516,
+            WM_RBUTTONUP = 517,
+            WM_MBUTTONDOWN = 519,
+            WM_MBUTTONUP = 520,
             WM_GBUTTONDOWN = 523,
             WM_GBUTTONUP = 524
         }

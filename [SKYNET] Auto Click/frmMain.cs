@@ -30,7 +30,6 @@ namespace SKYNET
         private MacroManager Macro;
         private bool isCaptured;
         private bool isRecording;
-        private KeyboardHook keyboardHook;
         private MacroStatus macroStatus;
 
         public frmMain()
@@ -49,11 +48,97 @@ namespace SKYNET
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            keyboardHook = new KeyboardHook();
-            keyboardHook.KeyDown += new KeyboardHook.KeyboardHookCallback(keyboardHook_KeyDown);
-            keyboardHook.Install();
-
             LoadKeys();
+
+            RegisterHotKey(this.Handle, (int)Settings.Capture, 0, (int)Settings.Capture);
+            RegisterHotKey(this.Handle, (int)Settings.StartClickBucle, 0, (int)Settings.StartClickBucle);
+            RegisterHotKey(this.Handle, (int)Settings.StopClickBucle, 0, (int)Settings.StopClickBucle);
+            RegisterHotKey(this.Handle, (int)Settings.StartMacroRecording, 0, (int)Settings.StartMacroRecording);
+            RegisterHotKey(this.Handle, (int)Settings.StopMacroRecording, 0, (int)Settings.StopMacroRecording);
+            RegisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro, 0, (int)Settings.PlayRecordedMacro);
+            RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
+
+        }
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                Keys Pressed = (Keys)m.WParam.ToInt32();
+                if (Pressed == Settings.Capture)
+                {
+                    if (isRecording) return;
+
+                    MouseHelper.GetCursorPos(out POINT p);
+                    X = p.X;
+                    Y = p.Y;
+                    isCaptured = true;
+                }
+                else if (Pressed == Settings.StartClickBucle)
+                {
+                    if (isRecording) return;
+                    if (!isCaptured)
+                    {
+                        modCommon.Show("The program dont have loaded any mouse coordenates" + Environment.NewLine + $"Please press \"{Settings.Capture}\" key to capture");
+                        return;
+                    }
+                    _timer.AutoReset = false;
+                    _timer.Elapsed += _timer_Elapsed;
+                    _timer.Start();
+                }
+                else if (Pressed == Settings.StopClickBucle)
+                {
+                    if (isRecording) return;
+                    _timer.Stop();
+                }
+                else if (Pressed == Settings.StartMacroRecording)
+                {
+                    if (isRecording) return;
+                    isRecording = true;
+                    Macro.StartRecording();
+                    macroStatus = MacroStatus.RecordingMacro;
+                    LB_MacroStatus.Text = "Recording";
+                    LB_MacroStatus.ForeColor = Color.DodgerBlue;
+                }
+                else if (Pressed == Settings.StopMacroRecording)
+                {
+                    isRecording = false;
+                    if (macroStatus == MacroStatus.RecordingMacro)
+                    {
+                        Macro.StopRecording();
+                        macroStatus = MacroStatus.Stoped;
+                        LB_MacroName.Text = "Macro_" + DateTime.Now.Ticks;
+                        LB_MacroDuration.Text = $"{modCommon.GetTime(Macro.Duration())}";
+                        LB_MacroStatus.Text = "Stoped";
+                        LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
+                    }
+                }
+                else if (Pressed == Settings.PlayRecordedMacro)
+                {
+                    if (isRecording) return;
+                    if (!Macro.HaveRecordedMacro)
+                    {
+                        modCommon.Show("You dont have any recorded macro" + Environment.NewLine + $"Please press \"{Settings.PlayRecordedMacro}\" key to record or load it from file");
+                        return;
+                    }
+                    Macro.StartMacro();
+                    macroStatus = MacroStatus.PlayingMacro;
+                    LB_MacroStatus.Text = "Running";
+                    LB_MacroStatus.ForeColor = Color.Lime;
+                }
+                else if (Pressed == Settings.StopRecordedMacro)
+                {
+                    if (isRecording) return;
+                    if (macroStatus == MacroStatus.PlayingMacro)
+                    {
+                        Macro.StopMacro();
+                        macroStatus = MacroStatus.Stoped;
+                        LB_MacroStatus.Text = "Stoped";
+                        LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
+                    }
+                }
+            }
+
+            base.WndProc(ref m);
         }
 
         private void LoadKeys()
@@ -184,81 +269,6 @@ namespace SKYNET
             _timer.Interval = Settings.Seconds * 1000;
             _timer.Start();
         }
-        private void keyboardHook_KeyDown(KeyboardHook.VKeys key)
-        {
-            if ((int)key == (int)Settings.Capture)
-            {
-                if (isRecording) return;
-
-                MouseHelper.GetCursorPos(out POINT p);
-                X = p.X;
-                Y = p.Y;
-                isCaptured = true;
-            }
-            else if ((int)key == (int)Settings.StartClickBucle)
-            {
-                if (isRecording) return;
-                if (!isCaptured)
-                {
-                    modCommon.Show("The program dont have loaded any mouse coordenates" + Environment.NewLine + $"Please press \"{Settings.Capture}\" key to capture");
-                    return;
-                }
-                _timer.AutoReset = false;
-                _timer.Elapsed += _timer_Elapsed;
-                _timer.Start();
-            }
-            else if ((int)key == (int)Settings.StopClickBucle)
-            {
-                if (isRecording) return;
-                _timer.Stop();
-            }
-            else if ((int)key == (int)Settings.StartMacroRecording)
-            {
-                if (isRecording) return;
-                isRecording = true;
-                Macro.StartRecording();
-                macroStatus = MacroStatus.RecordingMacro;
-                LB_MacroStatus.Text = "Recording";
-                LB_MacroStatus.ForeColor = Color.DodgerBlue;
-            }
-            else if ((int)key == (int)Settings.StopMacroRecording)
-            {
-                isRecording = false;
-                if (macroStatus == MacroStatus.RecordingMacro)
-                {
-                    Macro.StopRecording();
-                    macroStatus = MacroStatus.Stoped;
-                    LB_MacroName.Text = "Macro_" + DateTime.Now.Ticks;
-                    LB_MacroDuration.Text = $"{modCommon.GetTime(Macro.Duration())}";
-                    LB_MacroStatus.Text = "Stoped";
-                    LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
-                }
-            }
-            else if ((int)key == (int)Settings.PlayRecordedMacro)
-            {
-                if (isRecording) return;
-                if (!Macro.HaveRecordedMacro)
-                {
-                    modCommon.Show("You dont have any recorded macro" + Environment.NewLine + $"Please press \"{Settings.PlayRecordedMacro}\" key to record or load it from file");
-                    return;
-                }
-                Macro.StartMacro();
-                macroStatus = MacroStatus.PlayingMacro;
-                LB_MacroStatus.Text = "Running";
-                LB_MacroStatus.ForeColor = Color.Lime;
-            }
-            else if ((int)key == (int)Settings.StopRecordedMacro)
-            {
-                if (isRecording) return;
-                if (macroStatus == MacroStatus.PlayingMacro)
-                {
-                    Macro.StopMacro();
-                    macroStatus = MacroStatus.Stoped;
-                    LB_MacroStatus.Text = "Stoped";
-                    LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
-                }
-            }
-        }
         private enum SelectedKey
         {
             Unknown,
@@ -358,5 +368,14 @@ namespace SKYNET
                 Settings.Save();
             }
         }
+        public const int START_HOTKEY = 1;
+        public const int STOP_HOTKEY = 2;
+        public const int SELECT_HOTKEY = 3;
+        public const int CLEAR_HOTKEY = 4;
+
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
     }
 }
