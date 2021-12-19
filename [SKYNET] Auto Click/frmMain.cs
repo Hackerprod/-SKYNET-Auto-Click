@@ -51,13 +51,13 @@ namespace SKYNET
         {
             LoadKeys();
 
-            RegisterHotKey(this.Handle, (int)Settings.Capture, 0, (int)Settings.Capture);
-            RegisterHotKey(this.Handle, (int)Settings.StartClickBucle, 0, (int)Settings.StartClickBucle);
-            RegisterHotKey(this.Handle, (int)Settings.StopClickBucle, 0, (int)Settings.StopClickBucle);
-            RegisterHotKey(this.Handle, (int)Settings.StartMacroRecording, 0, (int)Settings.StartMacroRecording);
-            RegisterHotKey(this.Handle, (int)Settings.StopMacroRecording, 0, (int)Settings.StopMacroRecording);
-            RegisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro, 0, (int)Settings.PlayRecordedMacro);
-            RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
+            User32.RegisterHotKey(this.Handle, (int)Settings.Capture, 0, (int)Settings.Capture);
+            User32.RegisterHotKey(this.Handle, (int)Settings.StartClickBucle, 0, (int)Settings.StartClickBucle);
+            User32.RegisterHotKey(this.Handle, (int)Settings.StopClickBucle, 0, (int)Settings.StopClickBucle);
+            User32.RegisterHotKey(this.Handle, (int)Settings.StartMacroRecording, 0, (int)Settings.StartMacroRecording);
+            User32.RegisterHotKey(this.Handle, (int)Settings.StopMacroRecording, 0, (int)Settings.StopMacroRecording);
+            User32.RegisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro, 0, (int)Settings.PlayRecordedMacro);
+            User32.RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
 
         }
 
@@ -83,7 +83,7 @@ namespace SKYNET
                 {
                     if (isRecording) return;
 
-                    MouseHelper.GetCursorPos(out POINT p);
+                    User32.GetCursorPos(out POINT p);
                     X = p.X;
                     Y = p.Y;
                     isCaptured = true;
@@ -113,6 +113,7 @@ namespace SKYNET
                     macroStatus = MacroStatus.RecordingMacro;
                     LB_MacroStatus.Text = "Recording";
                     LB_MacroStatus.ForeColor = Color.DodgerBlue;
+                    if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Minimized;
                 }
                 else if (Pressed == Settings.StopMacroRecording)
                 {
@@ -125,6 +126,7 @@ namespace SKYNET
                         LB_MacroDuration.Text = $"{modCommon.GetTime(Macro.Duration())}";
                         LB_MacroStatus.Text = "Stoped";
                         LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
+                        if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
                     }
                 }
                 else if (Pressed == Settings.PlayRecordedMacro)
@@ -139,6 +141,7 @@ namespace SKYNET
                     macroStatus = MacroStatus.PlayingMacro;
                     LB_MacroStatus.Text = "Running";
                     LB_MacroStatus.ForeColor = Color.Lime;
+                    if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Minimized;
                 }
                 else if (Pressed == Settings.StopRecordedMacro)
                 {
@@ -146,6 +149,7 @@ namespace SKYNET
                     if (macroStatus == MacroStatus.PlayingMacro)
                     {
                         StopMacro();
+                        if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
                     }
                 }
             }
@@ -159,6 +163,7 @@ namespace SKYNET
             frm.macroStatus = MacroStatus.Stoped;
             frm.LB_MacroStatus.Text = "Stoped";
             frm.LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
+            if (Settings.MinimizeWhenStarts) frm.WindowState = FormWindowState.Normal;
         }
 
         private void LoadKeys()
@@ -394,11 +399,6 @@ namespace SKYNET
                 Settings.Save();
             }
         }
-
-        [DllImport("user32.dll")]
-        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
-        [DllImport("user32.dll")]
-        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         private void MinimizeWhenStarts_CheckedChanged(object sender, bool e)
         {

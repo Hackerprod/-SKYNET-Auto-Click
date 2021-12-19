@@ -118,7 +118,7 @@ namespace SKYNET
             {
                 try
                 {
-                    MouseHelper.GetCursorPos(out POINT p);
+                    User32.GetCursorPos(out POINT p);
                     var Event = new MouseEvent(p, currentClicked);
                     if (currentKey != null)
                     {
@@ -139,7 +139,7 @@ namespace SKYNET
                 if (currentStep < Step)
                 {
                     var Event = Record[currentStep];
-                    MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
+                    User32.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
                         case MouseMessages.ScrollUp:
@@ -160,7 +160,7 @@ namespace SKYNET
                 else if (currentStep == Step && currentStep != 1)
                 {
                     var Event = Record[currentStep - 1];
-                    MouseHelper.SetCursorPos(Event.Point.X, Event.Point.Y);
+                    User32.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
                         case MouseMessages.WM_MOUSEWHEEL:
@@ -187,19 +187,18 @@ namespace SKYNET
 
         }
 
-        [DllImport("user32.dll")]
-        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
+
 
         void PressKey(Keys keyCode)
         {
             const int KEYEVENTF_EXTENDEDKEY = 0x1;
             const int KEYEVENTF_KEYUP = 0x2;
-            keybd_event((byte)keyCode, 0x45, KEYEVENTF_EXTENDEDKEY, 0);
-            keybd_event((byte)keyCode, 0x45, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+            User32.keybd_event((byte)keyCode, 0x45, KEYEVENTF_EXTENDEDKEY, 0);
+            User32.keybd_event((byte)keyCode, 0x45, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
         }
         private void PressKey(KeyPressed key)
         {
-            keybd_event((byte)key.Key, 0x45, (byte)key.Action, 0);
+            User32.keybd_event((byte)key.Key, 0x45, (byte)key.Action, 0);
         }
     }
 }
