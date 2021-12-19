@@ -58,7 +58,6 @@ namespace SKYNET
             NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StopMacroRecording, 0, (int)Settings.StopMacroRecording);
             NativeMethods.RegisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro, 0, (int)Settings.PlayRecordedMacro);
             NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
-
         }
         protected override void WndProc(ref Message m)
         {
