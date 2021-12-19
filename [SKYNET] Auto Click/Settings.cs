@@ -12,6 +12,8 @@ namespace SKYNET
     public class Settings
     {
         public int Seconds { get; set; }
+        public bool MinimizeWhenStarts { get; set; }
+        public bool RestartBucle { get; set; }
         public Keys Capture { get; set; }
         public Keys StartClickBucle { get; set; }
         public Keys StopClickBucle { get; set; }
@@ -64,6 +66,8 @@ namespace SKYNET
                     StopMacroRecording = s.StopMacroRecording;
                     PlayRecordedMacro = s.PlayRecordedMacro;
                     StopRecordedMacro = s.StopRecordedMacro;
+                    MinimizeWhenStarts = s.MinimizeWhenStarts;
+                    RestartBucle = s.RestartBucle;
                 }
             }
             catch 

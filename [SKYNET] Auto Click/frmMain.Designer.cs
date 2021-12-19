@@ -74,6 +74,11 @@ namespace SKYNET
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.CH_MinimizeWhenStarts = new SKYNET.Controls.SKYNET_Check();
+            this.CH_RestartBucle = new SKYNET.Controls.SKYNET_Check();
+            this.label17 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.PN_Top.SuspendLayout();
             this.PN_Capture.SuspendLayout();
             this.PN_StartBucle.SuspendLayout();
@@ -492,7 +497,7 @@ namespace SKYNET
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(28, 448);
+            this.panel1.Location = new System.Drawing.Point(28, 516);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(437, 90);
             this.panel1.TabIndex = 22;
@@ -614,12 +619,70 @@ namespace SKYNET
             this.label7.TabIndex = 6;
             this.label7.Text = "CURRENT LOADED MACRO ";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.label11.Location = new System.Drawing.Point(25, 444);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(321, 17);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Minimize when the macro starts recording or playing ";
+            // 
+            // CH_MinimizeWhenStarts
+            // 
+            this.CH_MinimizeWhenStarts.BackColor = System.Drawing.Color.Transparent;
+            this.CH_MinimizeWhenStarts.Checked = false;
+            this.CH_MinimizeWhenStarts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CH_MinimizeWhenStarts.Location = new System.Drawing.Point(430, 442);
+            this.CH_MinimizeWhenStarts.Name = "CH_MinimizeWhenStarts";
+            this.CH_MinimizeWhenStarts.Size = new System.Drawing.Size(34, 25);
+            this.CH_MinimizeWhenStarts.TabIndex = 24;
+            this.CH_MinimizeWhenStarts.CheckedChanged += new System.EventHandler<bool>(this.MinimizeWhenStarts_CheckedChanged);
+            // 
+            // CH_RestartBucle
+            // 
+            this.CH_RestartBucle.BackColor = System.Drawing.Color.Transparent;
+            this.CH_RestartBucle.Checked = false;
+            this.CH_RestartBucle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CH_RestartBucle.Location = new System.Drawing.Point(430, 482);
+            this.CH_RestartBucle.Name = "CH_RestartBucle";
+            this.CH_RestartBucle.Size = new System.Drawing.Size(34, 25);
+            this.CH_RestartBucle.TabIndex = 26;
+            this.CH_RestartBucle.CheckedChanged += new System.EventHandler<bool>(this.RestartBucle_CheckedChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.label17.Location = new System.Drawing.Point(25, 484);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(228, 17);
+            this.label17.TabIndex = 25;
+            this.label17.Text = "Restart macro playback when finished";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
+            this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
+            this.panel7.Location = new System.Drawing.Point(26, 474);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(440, 1);
+            this.panel7.TabIndex = 103;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
-            this.ClientSize = new System.Drawing.Size(498, 570);
+            this.ClientSize = new System.Drawing.Size(498, 635);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.CH_RestartBucle);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.CH_MinimizeWhenStarts);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel9);
@@ -711,6 +774,11 @@ namespace SKYNET
         private Controls.SKYNET_Button BT_OpenFile;
         public System.Windows.Forms.Label LB_Tittle;
         public System.Windows.Forms.Label LB_MacroDuration;
+        private System.Windows.Forms.Label label11;
+        private Controls.SKYNET_Check CH_MinimizeWhenStarts;
+        private Controls.SKYNET_Check CH_RestartBucle;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Panel panel7;
     }
 }
 

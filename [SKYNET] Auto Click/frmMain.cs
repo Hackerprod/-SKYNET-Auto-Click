@@ -20,10 +20,10 @@ namespace SKYNET
     public partial class frmMain : frmBase
     {
         public static frmMain frm;
+        public static Settings Settings;
         public bool SettingsMode;
 
         private SelectedKey key;
-        private Settings Settings;
         private System.Timers.Timer _timer;
         private int X;
         private int Y;
@@ -31,6 +31,7 @@ namespace SKYNET
         private bool isCaptured;
         private bool isRecording;
         private MacroStatus macroStatus;
+        private const int WM_HOTKEY = 0x0312;
 
         public frmMain()
         {
@@ -59,9 +60,23 @@ namespace SKYNET
             RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
 
         }
+
+        protected override bool ProcessKeyPreview(ref System.Windows.Forms.Message m)
+        {
+            const int WM_KEYDOWN = 0x100;
+            const int WM_SYSKEYDOWN = 0x104;
+            const int WM_KEYUP = 0x101;
+            const int WM_SYSKEYUP = 0x105;
+
+            if (m.Msg == WM_KEYDOWN || m.Msg == WM_SYSKEYDOWN)
+            {
+                LB_Tittle.Text = ((Keys)m.WParam).ToString();
+            }
+            return base.ProcessKeyPreview(ref m);
+        }
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == 0x0312)
+            if (m.Msg == WM_HOTKEY)
             {
                 Keys Pressed = (Keys)m.WParam.ToInt32();
                 if (Pressed == Settings.Capture)
@@ -130,15 +145,20 @@ namespace SKYNET
                     if (isRecording) return;
                     if (macroStatus == MacroStatus.PlayingMacro)
                     {
-                        Macro.StopMacro();
-                        macroStatus = MacroStatus.Stoped;
-                        LB_MacroStatus.Text = "Stoped";
-                        LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
+                        StopMacro();
                     }
                 }
             }
 
             base.WndProc(ref m);
+        }
+
+        public static void StopMacro()
+        {
+            frm.Macro.StopMacro();
+            frm.macroStatus = MacroStatus.Stoped;
+            frm.LB_MacroStatus.Text = "Stoped";
+            frm.LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
         }
 
         private void LoadKeys()
@@ -151,6 +171,8 @@ namespace SKYNET
             LB_StopMacroRecording.Text = Settings.StopMacroRecording.ToString().ToUpper();
             LB_PlayRecordedMacro.Text = Settings.PlayRecordedMacro.ToString().ToUpper();
             LB_StopRecordedMacro.Text = Settings.StopRecordedMacro.ToString().ToUpper();
+            CH_RestartBucle.Checked = Settings.RestartBucle;
+            CH_MinimizeWhenStarts.Checked = Settings.MinimizeWhenStarts;
         }
 
         private void CloseBox_Clicked(object sender, EventArgs e)
@@ -241,18 +263,22 @@ namespace SKYNET
                     Settings.StopClickBucle = e.KeyData;
                     break;
                 case SelectedKey.StartMacroRecording:
+                    if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Minimized;
                     LB_StartMacroRecording.Text = e.KeyData.ToString().ToUpper();
                     Settings.StartMacroRecording = e.KeyData;
                     break;
                 case SelectedKey.StopMacroRecording:
+                    if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
                     LB_StopMacroRecording.Text = e.KeyData.ToString().ToUpper();
                     Settings.StopMacroRecording = e.KeyData;
                     break;
                 case SelectedKey.PlayRecordedMacro:
+                    if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Minimized;
                     LB_PlayRecordedMacro.Text = e.KeyData.ToString().ToUpper();
                     Settings.PlayRecordedMacro = e.KeyData;
                     break;
                 case SelectedKey.StopRecordedMacro:
+                    if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
                     LB_StopRecordedMacro.Text = e.KeyData.ToString().ToUpper();
                     Settings.StopRecordedMacro = e.KeyData;
                     break;
@@ -368,14 +394,22 @@ namespace SKYNET
                 Settings.Save();
             }
         }
-        public const int START_HOTKEY = 1;
-        public const int STOP_HOTKEY = 2;
-        public const int SELECT_HOTKEY = 3;
-        public const int CLEAR_HOTKEY = 4;
 
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        private void MinimizeWhenStarts_CheckedChanged(object sender, bool e)
+        {
+            Settings.MinimizeWhenStarts = CH_MinimizeWhenStarts.Checked;
+            Settings.Save();
+        }
+
+        private void RestartBucle_CheckedChanged(object sender, bool e)
+        {
+            Settings.RestartBucle = CH_RestartBucle.Checked;
+            Settings.Save();
+        }
     }
 }

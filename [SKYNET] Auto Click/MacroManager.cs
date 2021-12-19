@@ -148,6 +148,7 @@ namespace SKYNET
         public void StopMacro()
         {
             _timer.Stop();
+            currentStep = 1;
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -241,6 +242,11 @@ namespace SKYNET
                         PressKey(Event.Key);
                     }
                     currentStep = 1;
+                    if (!frmMain.Settings.RestartBucle)
+                    {
+                        frmMain.StopMacro();
+                        return;
+                    }
                 }
                 frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(currentStep * 10) + " / " + modCommon.GetTime(Step * 10);
             }

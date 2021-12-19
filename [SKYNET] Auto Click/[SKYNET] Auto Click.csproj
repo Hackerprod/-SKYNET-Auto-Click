@@ -60,6 +60,12 @@
     <Compile Include="GUI\Controls\SKYNET_Button.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GUI\Controls\SKYNET_Check.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\SKYNET_Check.designer.cs">
+      <DependentUpon>SKYNET_Check.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\SKYNET_CloseBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\SKYNET_Check.resx">
+      <DependentUpon>SKYNET_Check.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\SKYNET_CloseBox.resx">
       <DependentUpon>SKYNET_CloseBox.cs</DependentUpon>
@@ -156,6 +165,8 @@
     <None Include="Resources\present_64px.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\b_Off.png" />
+    <None Include="Resources\b_On.png" />
     <Content Include="wall_clock_100px.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
