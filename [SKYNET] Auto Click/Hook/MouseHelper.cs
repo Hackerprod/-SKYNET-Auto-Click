@@ -11,15 +11,15 @@ namespace SKYNET.Hook
 
         public static void SetClick(MouseMessages Event, int x, int y)
         {
-            User32.mouse_event((int)Event, x, y, 0, 0);
+            NativeMethods.mouse_event((int)Event, x, y, 0, 0);
         }
         public static void SetDoubleClick(int x, int y)
         {
             int LEFTDOWN = 0x02;
             int LEFTUP = 0x04;
-            User32.mouse_event(LEFTDOWN | LEFTUP, x, y, 0, 0);
+            NativeMethods.mouse_event(LEFTDOWN | LEFTUP, x, y, 0, 0);
             Thread.Sleep(150);
-            User32.mouse_event(LEFTDOWN | LEFTUP, x, y, 0, 0);
+            NativeMethods.mouse_event(LEFTDOWN | LEFTUP, x, y, 0, 0);
 
         }
 
@@ -27,35 +27,35 @@ namespace SKYNET.Hook
         {
             if (move)
             {
-                User32.SetCursorPos(x, y);
+                NativeMethods.SetCursorPos(x, y);
             }
 
-            User32.mouse_event((int)MouseMessages.WM_LBUTTONDOWN, x, y, 0, 0);
+            NativeMethods.mouse_event((int)MouseMessages.WM_LBUTTONDOWN, x, y, 0, 0);
             Thread.Sleep(29);
-            User32.mouse_event((int)MouseMessages.WM_LBUTTONUP, x, y, 0, 0);
+            NativeMethods.mouse_event((int)MouseMessages.WM_LBUTTONUP, x, y, 0, 0);
         }
 
         public static void RightClick(int x, int y, bool move = false)
         {
             if (move)
             {
-                User32.SetCursorPos(x, y);
+                NativeMethods.SetCursorPos(x, y);
             }
 
-            User32.mouse_event((int)MouseMessages.WM_RBUTTONDOWN, x, y, 0, 0);
+            NativeMethods.mouse_event((int)MouseMessages.WM_RBUTTONDOWN, x, y, 0, 0);
             Thread.Sleep(29);
-            User32.mouse_event((int)MouseMessages.WM_RBUTTONUP, x, y, 0, 0);
+            NativeMethods.mouse_event((int)MouseMessages.WM_RBUTTONUP, x, y, 0, 0);
         }
 
         internal static void SetWheel(MouseMessages wheel, int x, int y)
         {
             if (wheel == MouseMessages.ScrollUp)
             {
-                User32.mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, 120, 0);
+                NativeMethods.mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, 120, 0);
             }
             else if (wheel == MouseMessages.ScrollDown)
             {
-                User32.mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, -120, 0);
+                NativeMethods.mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, -120, 0);
             }
         }
     }

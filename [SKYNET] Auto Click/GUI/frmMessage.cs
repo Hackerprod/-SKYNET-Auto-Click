@@ -1,25 +1,25 @@
 ﻿using SKYNET;
+using SKYNET.GUI;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using static frmMessage;
 
-public partial class frmMessage : Form
+public partial class frmMessage : frmBase
 {
-    private bool mouseDown;     //Mover ventana
-    private Point lastLocation; //Mover ventana
+    private bool mouseDown;     
+    private Point lastLocation; 
     public TypeMessage typeMessage;
     public frmMessage(string message, TypeMessage type = TypeMessage.Normal)
     {
         InitializeComponent();
-        CheckForIllegalCrossThreadCalls = false;  //Para permitir acceso a los subprocesos
-
+        CheckForIllegalCrossThreadCalls = false;  
+        base.EnableShadows = true;
         typeMessage = type;
 
         switch (typeMessage)
         {
             case TypeMessage.Alert:
-
                 break;
             case TypeMessage.Normal:
                 acepctBtn.Visible = false;
@@ -81,20 +81,6 @@ public partial class frmMessage : Form
     private void TxtMessage_Enter(object sender, EventArgs e)
     {
         textBox1.Focus();
-    }
-    protected override void OnActivated(EventArgs e)
-    {
-        base.OnActivated(e);
-        int attrValue = 2;
-        DwmApi.DwmSetWindowAttribute(base.Handle, 2, ref attrValue, 4);
-        DwmApi.MARGINS mARGINS = default(DwmApi.MARGINS);
-        mARGINS.cyBottomHeight = 1;
-        mARGINS.cxLeftWidth = 0;
-        mARGINS.cxRightWidth = 0;
-        mARGINS.cyTopHeight = 0;
-        DwmApi.MARGINS marInset = mARGINS;
-        DwmApi.DwmExtendFrameIntoClientArea(base.Handle, ref marInset);
-
     }
     public enum TypeMessage
     {

@@ -8,7 +8,7 @@ using SKYNET.Hook;
 
 namespace SKYNET
 {
-    public class User32
+    public class NativeMethods
     {
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);

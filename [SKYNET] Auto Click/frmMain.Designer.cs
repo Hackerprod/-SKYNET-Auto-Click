@@ -164,10 +164,11 @@ namespace SKYNET
             this.TB_Time.Logo = global::SKYNET.Properties.Resources.present_64px;
             this.TB_Time.LogoCursor = System.Windows.Forms.Cursors.Default;
             this.TB_Time.Name = "TB_Time";
-            this.TB_Time.OnlyNumber = true;
+            this.TB_Time.OnlyNumbers = true;
             this.TB_Time.ShowLogo = true;
             this.TB_Time.Size = new System.Drawing.Size(206, 35);
             this.TB_Time.TabIndex = 6;
+            this.TB_Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_Time.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Time_KeyUp);
             // 
             // label2
@@ -481,9 +482,9 @@ namespace SKYNET
             this.label16.ForeColor = System.Drawing.Color.White;
             this.label16.Location = new System.Drawing.Point(6, 8);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(148, 17);
+            this.label16.Size = new System.Drawing.Size(259, 17);
             this.label16.TabIndex = 6;
-            this.label16.Text = "CREATE MACRO BUCLE";
+            this.label16.Text = "CREATE KEYBOARD AND MOUSE MACRO";
             // 
             // panel1
             // 

@@ -104,7 +104,7 @@ namespace SKYNET
             {
                 try
                 {
-                    User32.GetCursorPos(out POINT p);
+                    NativeMethods.GetCursorPos(out POINT p);
                     var Event = new MouseEvent(p, currentClicked);
                     if (currentKey != null)
                     {
@@ -125,7 +125,7 @@ namespace SKYNET
                 if (currentStep < Step)
                 {
                     var Event = Record[currentStep];
-                    User32.SetCursorPos(Event.Point.X, Event.Point.Y);
+                    NativeMethods.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
                         case MouseMessages.ScrollUp:
@@ -146,7 +146,7 @@ namespace SKYNET
                 else if (currentStep == Step && currentStep != 1)
                 {
                     var Event = Record[currentStep - 1];
-                    User32.SetCursorPos(Event.Point.X, Event.Point.Y);
+                    NativeMethods.SetCursorPos(Event.Point.X, Event.Point.Y);
                     switch (Event.Button)
                     {
                         case MouseMessages.ScrollUp:
@@ -175,7 +175,7 @@ namespace SKYNET
         }
         private void PressKey(KeyPressed key)
         {
-            User32.keybd_event((byte)key.Key, 0x45, (byte)key.Action, 0);
+            NativeMethods.keybd_event((byte)key.Key, 0x45, (byte)key.Action, 0);
         }
     }
 }

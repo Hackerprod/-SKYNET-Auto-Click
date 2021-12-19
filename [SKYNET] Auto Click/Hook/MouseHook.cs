@@ -27,7 +27,7 @@ namespace SKYNET
             if (hookID == IntPtr.Zero)
                 return;
 
-            User32.UnhookWindowsHookEx(hookID);
+            NativeMethods.UnhookWindowsHookEx(hookID);
             hookID = IntPtr.Zero;
         }
 
@@ -39,7 +39,7 @@ namespace SKYNET
         private IntPtr SetHook(MouseHookHandler proc)
         {
             using (ProcessModule module = Process.GetCurrentProcess().MainModule)
-                return User32.SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(module.ModuleName), 0);
+                return NativeMethods.SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(module.ModuleName), 0);
         }
 
         private IntPtr HookFunc(int nCode, IntPtr wParam, IntPtr lParam)
@@ -61,7 +61,7 @@ namespace SKYNET
                         break;
                 }
             }
-            return User32.CallNextHookEx(hookID, nCode, wParam, lParam);
+            return NativeMethods.CallNextHookEx(hookID, nCode, wParam, lParam);
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]

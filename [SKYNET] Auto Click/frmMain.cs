@@ -51,28 +51,14 @@ namespace SKYNET
         {
             LoadKeys();
 
-            User32.RegisterHotKey(this.Handle, (int)Settings.Capture, 0, (int)Settings.Capture);
-            User32.RegisterHotKey(this.Handle, (int)Settings.StartClickBucle, 0, (int)Settings.StartClickBucle);
-            User32.RegisterHotKey(this.Handle, (int)Settings.StopClickBucle, 0, (int)Settings.StopClickBucle);
-            User32.RegisterHotKey(this.Handle, (int)Settings.StartMacroRecording, 0, (int)Settings.StartMacroRecording);
-            User32.RegisterHotKey(this.Handle, (int)Settings.StopMacroRecording, 0, (int)Settings.StopMacroRecording);
-            User32.RegisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro, 0, (int)Settings.PlayRecordedMacro);
-            User32.RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.Capture, 0, (int)Settings.Capture);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StartClickBucle, 0, (int)Settings.StartClickBucle);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StopClickBucle, 0, (int)Settings.StopClickBucle);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StartMacroRecording, 0, (int)Settings.StartMacroRecording);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StopMacroRecording, 0, (int)Settings.StopMacroRecording);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro, 0, (int)Settings.PlayRecordedMacro);
+            NativeMethods.RegisterHotKey(this.Handle, (int)Settings.StopRecordedMacro, 0, (int)Settings.StopRecordedMacro);
 
-        }
-
-        protected override bool ProcessKeyPreview(ref System.Windows.Forms.Message m)
-        {
-            const int WM_KEYDOWN = 0x100;
-            const int WM_SYSKEYDOWN = 0x104;
-            const int WM_KEYUP = 0x101;
-            const int WM_SYSKEYUP = 0x105;
-
-            if (m.Msg == WM_KEYDOWN || m.Msg == WM_SYSKEYDOWN)
-            {
-                LB_Tittle.Text = ((Keys)m.WParam).ToString();
-            }
-            return base.ProcessKeyPreview(ref m);
         }
         protected override void WndProc(ref Message m)
         {
@@ -82,8 +68,7 @@ namespace SKYNET
                 if (Pressed == Settings.Capture)
                 {
                     if (isRecording) return;
-
-                    User32.GetCursorPos(out POINT p);
+                    NativeMethods.GetCursorPos(out POINT p);
                     X = p.X;
                     Y = p.Y;
                     isCaptured = true;
@@ -149,10 +134,10 @@ namespace SKYNET
                     if (macroStatus == MacroStatus.PlayingMacro)
                     {
                         StopMacro();
-                        if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
                     }
                 }
             }
+            else
 
             base.WndProc(ref m);
         }
@@ -182,6 +167,13 @@ namespace SKYNET
 
         private void CloseBox_Clicked(object sender, EventArgs e)
         {
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.Capture);
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.StartClickBucle);
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.StopClickBucle);
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.StartMacroRecording);
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.StopMacroRecording);
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.PlayRecordedMacro);
+            NativeMethods.UnregisterHotKey(this.Handle, (int)Settings.StopRecordedMacro);
             Application.Exit(); 
         }
 
