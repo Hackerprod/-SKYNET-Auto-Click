@@ -5,7 +5,7 @@
 
 [SKYNET] Auto Click is an application to automate the mause and keyboard events 
 
-![Screenshot](screenshot.png)
+![Screenshot](%5BSKYNET%5D%20Auto%20Click/Resources/screenshot.png)
 
 ## Features
 * Generates clicks with user-specified interval.
