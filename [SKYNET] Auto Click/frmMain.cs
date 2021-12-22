@@ -21,6 +21,8 @@ namespace SKYNET
     {
         public static frmMain frm;
         public static Settings Settings;
+        public static frmPopup Popup;
+
         public bool SettingsMode;
 
         private SelectedKey key;
@@ -98,6 +100,7 @@ namespace SKYNET
                     LB_MacroStatus.Text = "Recording";
                     LB_MacroStatus.ForeColor = Color.DodgerBlue;
                     if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Minimized;
+                    if (Settings.ShowPopup) (Popup = new frmPopup(frmPopup.PopupType.Recording)).Show();
                 }
                 else if (Pressed == Settings.StopMacroRecording)
                 {
@@ -111,6 +114,7 @@ namespace SKYNET
                         LB_MacroStatus.Text = "Stoped";
                         LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
                         if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
+                        if (Popup != null) Popup.Close();
                     }
                 }
                 else if (Pressed == Settings.PlayRecordedMacro)
@@ -126,6 +130,7 @@ namespace SKYNET
                     LB_MacroStatus.Text = "Running";
                     LB_MacroStatus.ForeColor = Color.Lime;
                     if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Minimized;
+                    if (Settings.ShowPopup) (Popup = new frmPopup(frmPopup.PopupType.Playing)).Show();
                 }
                 else if (Pressed == Settings.StopRecordedMacro)
                 {
@@ -134,6 +139,7 @@ namespace SKYNET
                     {
                         StopMacro();
                     }
+                    if (Popup != null) Popup.Close();
                 }
             }
             else
@@ -162,6 +168,7 @@ namespace SKYNET
             LB_StopRecordedMacro.Text = Settings.StopRecordedMacro.ToString().ToUpper();
             CH_RestartBucle.Checked = Settings.RestartBucle;
             CH_MinimizeWhenStarts.Checked = Settings.MinimizeWhenStarts;
+            CH_ShowPopup.Checked = Settings.ShowPopup;
         }
 
         private void CloseBox_Clicked(object sender, EventArgs e)
@@ -400,6 +407,12 @@ namespace SKYNET
         private void RestartBucle_CheckedChanged(object sender, bool e)
         {
             Settings.RestartBucle = CH_RestartBucle.Checked;
+            Settings.Save();
+        }
+
+        private void ShowPopup_CheckedChanged(object sender, bool e)
+        {
+            Settings.ShowPopup = CH_ShowPopup.Checked;
             Settings.Save();
         }
     }

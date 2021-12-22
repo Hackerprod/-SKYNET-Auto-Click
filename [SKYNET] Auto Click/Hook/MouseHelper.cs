@@ -58,6 +58,39 @@ namespace SKYNET.Hook
                 NativeMethods.mouse_event((int)MouseMessages.WM_MOUSEWHEEL, x, y, -120, 0);
             }
         }
+
+        internal static void SetXClick(MouseMessages button, int x, int y)
+        {
+            MouseMessages flags = 0;
+            int xbutton = 0;
+            switch (button)
+            {
+                case MouseMessages.XButton1Up:
+                    flags = MouseMessages.WM_XBUTTONUP;
+                    xbutton = 0x00000001;
+                    break;
+                case MouseMessages.XButton1Down:
+                    flags = MouseMessages.WM_XBUTTONDOWN;
+                    xbutton = 0x00000001;
+                    break;
+                case MouseMessages.XButton2Up:
+                    flags = MouseMessages.WM_XBUTTONUP;
+                    xbutton = 0x00000002;
+                    break;
+                case MouseMessages.XButton2Down:
+                    flags = MouseMessages.WM_XBUTTONDOWN;
+                    xbutton = 0x00000002;
+                    break;
+                default:
+                    break;
+            }
+            NativeMethods.mouse_event((int)flags, x, y, xbutton, 0);
+        }
+        private enum MouseXButton
+        {
+            XBUTTON1 = 0x00000001,
+            XBUTTON2 = 0x00000002,
+        }
     }
     public delegate IntPtr MouseHookHandler(int nCode, IntPtr wParam, IntPtr lParam);
 }

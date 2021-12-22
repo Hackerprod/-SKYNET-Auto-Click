@@ -56,6 +56,10 @@ namespace SKYNET
                     case IN_MouseMessages.WM_MOUSEWHEEL:
                         OnMouseEvent?.Invoke(this, new MouseEvent((MouseMessages)MOUSEINPUT.mouseData, MOUSEINPUT));
                         break;
+                    case IN_MouseMessages.WM_XBUTTONDOWN:
+                    case IN_MouseMessages.WM_XBUTTONUP:
+                        OnMouseEvent?.Invoke(this, new MouseEvent((IN_MouseMessages)wParam, MOUSEINPUT));
+                        break;
                     default:
                         OnMouseEvent?.Invoke(this, new MouseEvent((IN_MouseMessages)wParam, MOUSEINPUT));
                         break;
@@ -76,6 +80,22 @@ namespace SKYNET
             {
                 EventType = ParseType(msg);
                 MouseInput = input;
+
+                switch (msg)
+                {
+                    case IN_MouseMessages.WM_XBUTTONDOWN:
+                    case IN_MouseMessages.WM_XBUTTONUP:
+                        switch (input.mouseData)
+                        {
+                            case 65536:
+                                EventType = msg == IN_MouseMessages.WM_XBUTTONDOWN ? MouseMessages.XButton1Down : MouseMessages.XButton1Up;
+                                break;
+                            case 131072:
+                                EventType = msg == IN_MouseMessages.WM_XBUTTONDOWN ? MouseMessages.XButton2Down : MouseMessages.XButton2Up;
+                                break;
+                        }
+                        break;
+                }
             }
             public MouseEvent(MouseMessages msg, MOUSEINPUT input)
             {
@@ -107,8 +127,8 @@ namespace SKYNET
         WM_RBUTTONUP = 517,
         WM_MBUTTONDOWN = 519,
         WM_MBUTTONUP = 520,
-        WM_GBUTTONDOWN = 523,
-        WM_GBUTTONUP = 524
+        WM_XBUTTONDOWN = 523,
+        WM_XBUTTONUP = 524
     }
     public enum MouseMessages
     {
@@ -124,10 +144,14 @@ namespace SKYNET
         WM_RBUTTONUP = 0x0010,
         WM_MBUTTONDOWN = 0x0020,
         WM_MBUTTONUP = 0x0040,
-        WM_GBUTTONDOWN = 0x0080,
-        WM_GBUTTONUP = 0x0100,
+        WM_XBUTTONDOWN = 0x0080,
+        WM_XBUTTONUP = 0x0100,
 
         ScrollUp = 7864320,
         ScrollDown = -7864320,
+        XButton1Up = 131072,
+        XButton1Down = -131072,
+        XButton2Up = 65536,
+        XButton2Down = -65536,
     }
 }

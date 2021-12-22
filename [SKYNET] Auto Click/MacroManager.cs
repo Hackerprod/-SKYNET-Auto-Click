@@ -114,7 +114,12 @@ namespace SKYNET
                     Record.Add(Step, Event);
                     currentClicked = MouseMessages.None;
                     Step += 1;
-                    frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(Step * 10);
+                    string time = modCommon.GetTime(Step * 10);
+                    frmMain.frm.LB_MacroDuration.Text = time;
+                    if (frmMain.Popup != null)
+                    {
+                        frmMain.Popup.SetTime(time);
+                    }
                 }
                 catch 
                 {
@@ -132,6 +137,12 @@ namespace SKYNET
                         case MouseMessages.ScrollDown:
                         case MouseMessages.WM_MOUSEWHEEL:
                             MouseHelper.SetWheel(Event.Button, Event.Point.X, Event.Point.Y);
+                            break;
+                        case MouseMessages.XButton1Down:
+                        case MouseMessages.XButton1Up:
+                        case MouseMessages.XButton2Down:
+                        case MouseMessages.XButton2Up:
+                            MouseHelper.SetXClick(Event.Button, Event.Point.X, Event.Point.Y);
                             break;
                         default:
                             MouseHelper.SetClick(Event.Button, Event.Point.X, Event.Point.Y);
@@ -166,10 +177,16 @@ namespace SKYNET
                     if (!frmMain.Settings.RestartBucle)
                     {
                         frmMain.StopMacro();
+                        frmMain.Popup.Close();
                         return;
                     }
                 }
-                frmMain.frm.LB_MacroDuration.Text = modCommon.GetTime(currentStep * 10) + " / " + modCommon.GetTime(Step * 10);
+                string time = modCommon.GetTime(currentStep * 10) + " / " + modCommon.GetTime(Step * 10);
+                frmMain.frm.LB_MacroDuration.Text = time;
+                if (frmMain.Popup != null)
+                {
+                    frmMain.Popup.SetTime(time);
+                }
             }
             _timer.Start();
         }

@@ -21,11 +21,13 @@ namespace SKYNET
         public Keys StopMacroRecording { get; set; }
         public Keys PlayRecordedMacro { get; set; }
         public Keys StopRecordedMacro { get; set; }
+        public bool ShowPopup { get; set; }
 
 
         ///////////////////////////////////////////////////////////////////
 
         private RegistryKey Registry { get; set; }
+
         private string SubKey = @"SOFTWARE\SKYNET\[SKYNET] Auto Click\";
 
         public Settings()
