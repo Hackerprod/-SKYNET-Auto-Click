@@ -23,6 +23,8 @@ namespace SKYNET
         private KeyPressed currentKey;
         private MouseHook MouseHook;
         private KeyboardHook keyboardHook;
+        private int finishedInterval;
+
         public bool HaveRecordedMacro 
         {
             get
@@ -61,6 +63,7 @@ namespace SKYNET
         {
             currentKey = new KeyPressed((Keys)key, KeyAction.KeyDown);
         }
+
         private void KeyboardHook_KeyUp(KeyboardHook.VKeys key)
         {
             currentKey = new KeyPressed((Keys)key, KeyAction.KeyUp);
@@ -70,9 +73,11 @@ namespace SKYNET
         {
             return Record.Count * 10;
         }
+
         public void StartRecording()
         {
             currentClicked = MouseMessages.None;
+            _timer.Interval = 5;
             MouseHook.Install();
             keyboardHook.Install();
             Step = 1;
@@ -80,6 +85,7 @@ namespace SKYNET
             Record.Clear();
             _timer.Start();
         }
+
         public void StopRecording()
         {
             currentClicked = MouseMessages.None;
@@ -87,18 +93,21 @@ namespace SKYNET
             MouseHook.Uninstall();
             keyboardHook.Uninstall();
         }
-        public void StartMacro()
+
+        public void StartMacro(int MacroInterval)
         {
             isRecording = false;
+            finishedInterval = MacroInterval;
             _timer.Start();
         }
+
         public void StopMacro()
         {
             _timer.Stop();
             currentStep = 1;
         }
 
-        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        private async void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (isRecording)
             {
@@ -114,7 +123,7 @@ namespace SKYNET
                     Record.Add(Step, Event);
                     currentClicked = MouseMessages.None;
                     Step += 1;
-                    string time = modCommon.GetTime(Step * 10);
+                    string time = Common.GetTime(Step * 10);
                     frmMain.frm.LB_MacroDuration.Text = time;
                     if (frmMain.Popup != null)
                     {
@@ -174,22 +183,35 @@ namespace SKYNET
                         PressKey(Event.Key);
                     }
                     currentStep = 1;
-                    if (!frmMain.Settings.RestartBucle)
+                    if (frmMain.Settings.RestartBucle)
+                    {
+                        var fTime = finishedInterval == 0 ? 0 : finishedInterval * 1000;
+                        await AwaitTime(fTime);
+                    }
+                    else 
                     {
                         frmMain.StopMacro();
                         frmMain.Popup.Close();
                         return;
                     }
                 }
-                string time = modCommon.GetTime(currentStep * 10) + " / " + modCommon.GetTime(Step * 10);
+                string time = Common.GetTime(currentStep * 10) + " / " + Common.GetTime(Step * 10);
                 frmMain.frm.LB_MacroDuration.Text = time;
                 if (frmMain.Popup != null)
                 {
                     frmMain.Popup.SetTime(time);
                 }
             }
+
+            
             _timer.Start();
         }
+
+        private async Task AwaitTime(int time)
+        {
+            await Task.Delay(time);
+        }
+
         private void PressKey(KeyPressed key)
         {
             NativeMethods.keybd_event((byte)key.Key, 0x45, (byte)key.Action, 0);

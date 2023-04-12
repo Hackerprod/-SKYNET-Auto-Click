@@ -14,6 +14,16 @@ namespace SKYNET.GUI
         private bool _blur;
         private bool _shadows;
 
+        [DllImport("user32.dll")]
+        static internal extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hdc, ref MARGINS marInset);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+
         [Category("SKYNET")]
         public bool BlurEffect 
         {
@@ -62,6 +72,7 @@ namespace SKYNET.GUI
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
         }
+
         private void EnableBlur()
         {
             var accent = new AccentPolicy();
@@ -76,16 +87,14 @@ namespace SKYNET.GUI
             SetWindowCompositionAttribute(this.Handle, ref Data);
             Marshal.FreeHGlobal(accentPtr);
         }
-        public virtual void LoadLanguage()
-        {
 
-        }
         public void SetMouseMove(Control control)
         {
             control.MouseMove += Event_MouseMove;
             control.MouseDown += Event_MouseDown;
             control.MouseUp   += Event_MouseUp;
         }
+
         private void Event_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
@@ -107,13 +116,11 @@ namespace SKYNET.GUI
             mouseDown = false;
         }
 
-        [DllImport("user32.dll")]
-        static internal extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
-
         enum AccentState
         {
             ACCENT_ENABLE_BLURBEHIND = 3
         }
+
         struct AccentPolicy
         {
             public AccentState AccentState;
@@ -121,16 +128,19 @@ namespace SKYNET.GUI
             public int GradientColor;
             public int AnimationId;
         }
+
         internal struct WindowCompositionAttributeData
         {
             public WindowCompositionAttribute Attribute;
             public IntPtr Data;
             public int SizeOfData;
         }
+
         internal enum WindowCompositionAttribute
         {
             WCA_ACCENT_POLICY = 19
         }
+
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
@@ -148,12 +158,6 @@ namespace SKYNET.GUI
                 DwmExtendFrameIntoClientArea(base.Handle, ref marInset);
             }
         }
-
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmExtendFrameIntoClientArea(IntPtr hdc, ref MARGINS marInset);
-
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
         public struct MARGINS
         {

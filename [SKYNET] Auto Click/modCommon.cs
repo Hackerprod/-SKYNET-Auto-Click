@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-public class modCommon
+public class Common
 {
     public static void Show(object v)
     {

@@ -82,6 +82,9 @@ namespace SKYNET
             this.panel2 = new System.Windows.Forms.Panel();
             this.CH_ShowPopup = new SKYNET.Controls.SKYNET_Check();
             this.label18 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.TB_MacroInterval = new SKYNET.Controls.SKYNET_TextBox();
             this.PN_Top.SuspendLayout();
             this.PN_Capture.SuspendLayout();
             this.PN_StartBucle.SuspendLayout();
@@ -501,7 +504,7 @@ namespace SKYNET
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(28, 538);
+            this.panel1.Location = new System.Drawing.Point(28, 598);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(437, 90);
             this.panel1.TabIndex = 22;
@@ -628,7 +631,7 @@ namespace SKYNET
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label11.Location = new System.Drawing.Point(25, 437);
+            this.label11.Location = new System.Drawing.Point(25, 497);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(321, 17);
             this.label11.TabIndex = 23;
@@ -639,7 +642,7 @@ namespace SKYNET
             this.CH_MinimizeWhenStarts.BackColor = System.Drawing.Color.Transparent;
             this.CH_MinimizeWhenStarts.Checked = false;
             this.CH_MinimizeWhenStarts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CH_MinimizeWhenStarts.Location = new System.Drawing.Point(430, 435);
+            this.CH_MinimizeWhenStarts.Location = new System.Drawing.Point(430, 495);
             this.CH_MinimizeWhenStarts.Name = "CH_MinimizeWhenStarts";
             this.CH_MinimizeWhenStarts.Size = new System.Drawing.Size(34, 25);
             this.CH_MinimizeWhenStarts.TabIndex = 24;
@@ -650,7 +653,7 @@ namespace SKYNET
             this.CH_RestartBucle.BackColor = System.Drawing.Color.Transparent;
             this.CH_RestartBucle.Checked = false;
             this.CH_RestartBucle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CH_RestartBucle.Location = new System.Drawing.Point(430, 505);
+            this.CH_RestartBucle.Location = new System.Drawing.Point(430, 565);
             this.CH_RestartBucle.Name = "CH_RestartBucle";
             this.CH_RestartBucle.Size = new System.Drawing.Size(34, 25);
             this.CH_RestartBucle.TabIndex = 26;
@@ -661,7 +664,7 @@ namespace SKYNET
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label17.Location = new System.Drawing.Point(25, 507);
+            this.label17.Location = new System.Drawing.Point(25, 567);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(228, 17);
             this.label17.TabIndex = 25;
@@ -671,7 +674,7 @@ namespace SKYNET
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
             this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
-            this.panel7.Location = new System.Drawing.Point(26, 464);
+            this.panel7.Location = new System.Drawing.Point(26, 524);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(440, 1);
             this.panel7.TabIndex = 103;
@@ -680,7 +683,7 @@ namespace SKYNET
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
             this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
-            this.panel2.Location = new System.Drawing.Point(26, 499);
+            this.panel2.Location = new System.Drawing.Point(26, 559);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(440, 1);
             this.panel2.TabIndex = 106;
@@ -690,7 +693,7 @@ namespace SKYNET
             this.CH_ShowPopup.BackColor = System.Drawing.Color.Transparent;
             this.CH_ShowPopup.Checked = false;
             this.CH_ShowPopup.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CH_ShowPopup.Location = new System.Drawing.Point(430, 470);
+            this.CH_ShowPopup.Location = new System.Drawing.Point(430, 530);
             this.CH_ShowPopup.Name = "CH_ShowPopup";
             this.CH_ShowPopup.Size = new System.Drawing.Size(34, 25);
             this.CH_ShowPopup.TabIndex = 105;
@@ -701,18 +704,59 @@ namespace SKYNET
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label18.Location = new System.Drawing.Point(25, 472);
+            this.label18.Location = new System.Drawing.Point(25, 532);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(316, 17);
             this.label18.TabIndex = 104;
             this.label18.Text = "Open Popup when the macro is playing or recording";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
+            this.panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
+            this.panel3.Location = new System.Drawing.Point(26, 489);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(440, 1);
+            this.panel3.TabIndex = 107;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.label20.Location = new System.Drawing.Point(25, 446);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(181, 17);
+            this.label20.TabIndex = 108;
+            this.label20.Text = "Time elapsed between Macro";
+            // 
+            // TB_MacroInterval
+            // 
+            this.TB_MacroInterval.ActivatedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
+            this.TB_MacroInterval.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
+            this.TB_MacroInterval.Color = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
+            this.TB_MacroInterval.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.TB_MacroInterval.IsPassword = false;
+            this.TB_MacroInterval.Location = new System.Drawing.Point(259, 438);
+            this.TB_MacroInterval.Logo = global::SKYNET.Properties.Resources.present_64px;
+            this.TB_MacroInterval.LogoCursor = System.Windows.Forms.Cursors.Default;
+            this.TB_MacroInterval.Name = "TB_MacroInterval";
+            this.TB_MacroInterval.OnlyNumbers = true;
+            this.TB_MacroInterval.ShowLogo = true;
+            this.TB_MacroInterval.Size = new System.Drawing.Size(206, 35);
+            this.TB_MacroInterval.TabIndex = 109;
+            this.TB_MacroInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_MacroInterval.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MacroInterval_KeyUp);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
-            this.ClientSize = new System.Drawing.Size(498, 659);
+            this.ClientSize = new System.Drawing.Size(498, 721);
+            this.Controls.Add(this.TB_MacroInterval);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.CH_ShowPopup);
             this.Controls.Add(this.label18);
@@ -820,6 +864,9 @@ namespace SKYNET
         private System.Windows.Forms.Panel panel2;
         private Controls.SKYNET_Check CH_ShowPopup;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label20;
+        private Controls.SKYNET_TextBox TB_MacroInterval;
     }
 }
 

@@ -64,6 +64,7 @@ namespace SKYNET.Controls
                 _ForeColorMouseOver = value;
             }
         }
+
         [Flags]
         public enum ImgAlign
         {

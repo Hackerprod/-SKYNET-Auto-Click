@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -22,7 +18,7 @@ namespace SKYNET
         public Keys PlayRecordedMacro { get; set; }
         public Keys StopRecordedMacro { get; set; }
         public bool ShowPopup { get; set; }
-
+        public int MacroInterval { get; set; }
 
         ///////////////////////////////////////////////////////////////////
 
@@ -45,7 +41,7 @@ namespace SKYNET
                 StopMacroRecording = Keys.F2;
                 PlayRecordedMacro = Keys.F3;
                 StopRecordedMacro = Keys.F4;
-
+                MacroInterval = 0;
                 Save();
             }
         }
@@ -70,6 +66,7 @@ namespace SKYNET
                     StopRecordedMacro = s.StopRecordedMacro;
                     MinimizeWhenStarts = s.MinimizeWhenStarts;
                     RestartBucle = s.RestartBucle;
+                    MacroInterval = s.MacroInterval;
                 }
             }
             catch 
@@ -82,6 +79,7 @@ namespace SKYNET
                 StopMacroRecording = Keys.F2;
                 PlayRecordedMacro = Keys.F3;
                 StopRecordedMacro = Keys.F4;
+                MacroInterval = 0;
             }
         }
 
