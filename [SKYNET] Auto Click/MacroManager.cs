@@ -110,6 +110,11 @@ namespace SKYNET
 
         private async void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            if (_stopped)
+            {
+                return;
+            }
+
             if (isRecording)
             {
                 try
@@ -137,8 +142,6 @@ namespace SKYNET
             }
             else
             {
-                _stopped = false;
-
                 if (currentStep < Step)
                 {
                     var Event = Record[currentStep];

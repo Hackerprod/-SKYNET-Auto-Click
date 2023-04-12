@@ -42,6 +42,7 @@ namespace SKYNET
                 PlayRecordedMacro = Keys.F3;
                 StopRecordedMacro = Keys.F4;
                 MacroInterval = 0;
+                ShowPopup = false;
                 Save();
             }
         }
@@ -54,7 +55,7 @@ namespace SKYNET
                 {
                     string JSON = Registry.GetValue("ParsedSettings", RegistryValueKind.String).ToString();
 
-                    Settings  s = new JavaScriptSerializer().Deserialize<Settings>(JSON);
+                    var s = new JavaScriptSerializer().Deserialize<Settings>(JSON);
                     Capture = s.Capture;
                     StartClickBucle   = s.StartClickBucle;
                     StopClickBucle    = s.StopClickBucle;
