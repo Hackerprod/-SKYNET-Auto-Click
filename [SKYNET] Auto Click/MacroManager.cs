@@ -12,9 +12,9 @@ namespace SKYNET
         public Dictionary<int, MouseEvent> Record;
         public int Step;
         public event EventHandler<int> AwaitTick;
+        public bool Recording;
 
         private System.Timers.Timer _timer;
-        private bool isRecording;
         private bool _stopped;
         private int currentStep;
         private MouseMessages currentClicked;
@@ -30,8 +30,6 @@ namespace SKYNET
                 return Record.Count > 0;
             }
         }
-
-        public bool Recording { get; internal set; }
 
         public MacroManager()
         {
@@ -81,22 +79,26 @@ namespace SKYNET
             MouseHook.Install();
             keyboardHook.Install();
             Step = 1;
-            isRecording = true;
+            Recording = true;
+            _stopped = false;
             Record.Clear();
             _timer.Start();
         }
 
         public void StopRecording()
         {
+            Recording = false;
             currentClicked = MouseMessages.None;
             _timer.Stop();
+            _stopped = true;
             MouseHook.Uninstall();
             keyboardHook.Uninstall();
         }
 
         public void StartMacro(int MacroInterval)
         {
-            isRecording = false;
+            Recording = false;
+            _stopped = false;
             finishedInterval = MacroInterval;
             _timer.Start();
         }
@@ -115,7 +117,7 @@ namespace SKYNET
                 return;
             }
 
-            if (isRecording)
+            if (Recording)
             {
                 try
                 {

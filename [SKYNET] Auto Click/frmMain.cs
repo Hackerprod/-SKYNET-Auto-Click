@@ -89,7 +89,6 @@ namespace SKYNET
                 else if (Pressed == Settings.StartMacroRecording)
                 {
                     if (Macro.Recording) return;
-                    Macro.Recording = true;
                     Macro.StartRecording();
                     macroStatus = MacroStatus.RecordingMacro;
                     LB_MacroStatus.Text = "Recording";
@@ -99,7 +98,6 @@ namespace SKYNET
                 }
                 else if (Pressed == Settings.StopMacroRecording)
                 {
-                    Macro.Recording = false;
                     if (macroStatus == MacroStatus.RecordingMacro)
                     {
                         Macro.StopRecording();
