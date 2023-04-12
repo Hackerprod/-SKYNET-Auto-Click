@@ -1,4 +1,4 @@
-<img src="[SKYNET] Auto Click/wall_clock_100px.ico" align="right" height="150" width="150" />
+<img src="[SKYNET] Auto Click/Resources/Icon.ico" align="right" height="150" width="150" />
 
 # [SKYNET] Auto Click
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Hackerprod/-SKYNET-Auto-Click?style=plastic)
