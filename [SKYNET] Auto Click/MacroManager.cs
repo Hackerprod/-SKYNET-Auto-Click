@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -15,9 +11,11 @@ namespace SKYNET
     {
         public Dictionary<int, MouseEvent> Record;
         public int Step;
+        public event EventHandler<int> AwaitTick;
 
         private System.Timers.Timer _timer;
         private bool isRecording;
+        private bool _stopped;
         private int currentStep;
         private MouseMessages currentClicked;
         private KeyPressed currentKey;
@@ -32,6 +30,8 @@ namespace SKYNET
                 return Record.Count > 0;
             }
         }
+
+        public bool Recording { get; internal set; }
 
         public MacroManager()
         {
@@ -104,6 +104,7 @@ namespace SKYNET
         public void StopMacro()
         {
             _timer.Stop();
+            _stopped = true;
             currentStep = 1;
         }
 
@@ -136,6 +137,8 @@ namespace SKYNET
             }
             else
             {
+                _stopped = false;
+
                 if (currentStep < Step)
                 {
                     var Event = Record[currentStep];
@@ -209,7 +212,17 @@ namespace SKYNET
 
         private async Task AwaitTime(int time)
         {
-            await Task.Delay(time);
+            var ticks = time / 5;
+
+            for (int i = 0; i < (ticks / 2) ; i++)
+            {
+                AwaitTick?.Invoke(this, i);
+                await Task.Delay(5);
+                if (_stopped)
+                {
+                    break;
+                }
+            }
         }
 
         private void PressKey(KeyPressed key)

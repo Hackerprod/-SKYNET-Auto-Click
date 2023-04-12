@@ -45,7 +45,6 @@ namespace SKYNET
             this.PN_StopBucle = new System.Windows.Forms.Panel();
             this.LB_StopBucle = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox = new System.Windows.Forms.TextBox();
             this.PN_StartMacroRecording = new System.Windows.Forms.Panel();
             this.LB_StartMacroRecording = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -65,6 +64,8 @@ namespace SKYNET
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.LB_AwaitTime = new System.Windows.Forms.Label();
             this.BT_SaveFile = new SKYNET.Controls.SKYNET_Button();
             this.BT_OpenFile = new SKYNET.Controls.SKYNET_Button();
             this.LB_MacroStatus = new System.Windows.Forms.Label();
@@ -85,6 +86,7 @@ namespace SKYNET
             this.panel3 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.TB_MacroInterval = new SKYNET.Controls.SKYNET_TextBox();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.PN_Top.SuspendLayout();
             this.PN_Capture.SuspendLayout();
             this.PN_StartBucle.SuspendLayout();
@@ -107,7 +109,7 @@ namespace SKYNET
             this.PN_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.PN_Top.Location = new System.Drawing.Point(0, 0);
             this.PN_Top.Name = "PN_Top";
-            this.PN_Top.Size = new System.Drawing.Size(498, 25);
+            this.PN_Top.Size = new System.Drawing.Size(957, 27);
             this.PN_Top.TabIndex = 2;
             // 
             // MinimizeBox
@@ -116,7 +118,7 @@ namespace SKYNET
             this.MinimizeBox.Color = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.MinimizeBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.MinimizeBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(70)))), ((int)(((byte)(82)))));
-            this.MinimizeBox.Location = new System.Drawing.Point(430, 0);
+            this.MinimizeBox.Location = new System.Drawing.Point(889, 0);
             this.MinimizeBox.MaximumSize = new System.Drawing.Size(34, 26);
             this.MinimizeBox.MinimumSize = new System.Drawing.Size(34, 26);
             this.MinimizeBox.Name = "MinimizeBox";
@@ -128,7 +130,7 @@ namespace SKYNET
             // 
             this.LB_Tittle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Tittle.ForeColor = System.Drawing.Color.White;
-            this.LB_Tittle.Location = new System.Drawing.Point(23, 6);
+            this.LB_Tittle.Location = new System.Drawing.Point(23, 5);
             this.LB_Tittle.Name = "LB_Tittle";
             this.LB_Tittle.Size = new System.Drawing.Size(115, 15);
             this.LB_Tittle.TabIndex = 6;
@@ -140,7 +142,7 @@ namespace SKYNET
             this.CloseBox.Color = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.CloseBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.CloseBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(70)))), ((int)(((byte)(82)))));
-            this.CloseBox.Location = new System.Drawing.Point(464, 0);
+            this.CloseBox.Location = new System.Drawing.Point(923, 0);
             this.CloseBox.MaximumSize = new System.Drawing.Size(34, 26);
             this.CloseBox.MinimumSize = new System.Drawing.Size(34, 26);
             this.CloseBox.Name = "CloseBox";
@@ -153,7 +155,7 @@ namespace SKYNET
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label1.Location = new System.Drawing.Point(25, 99);
+            this.label1.Location = new System.Drawing.Point(490, 107);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 17);
             this.label1.TabIndex = 5;
@@ -166,7 +168,7 @@ namespace SKYNET
             this.TB_Time.Color = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.TB_Time.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.TB_Time.IsPassword = false;
-            this.TB_Time.Location = new System.Drawing.Point(28, 123);
+            this.TB_Time.Location = new System.Drawing.Point(493, 131);
             this.TB_Time.Logo = global::SKYNET.Properties.Resources.present_64px;
             this.TB_Time.LogoCursor = System.Windows.Forms.Cursors.Default;
             this.TB_Time.Name = "TB_Time";
@@ -182,7 +184,7 @@ namespace SKYNET
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label2.Location = new System.Drawing.Point(258, 99);
+            this.label2.Location = new System.Drawing.Point(723, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(198, 17);
             this.label2.TabIndex = 7;
@@ -193,7 +195,7 @@ namespace SKYNET
             this.PN_Capture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_Capture.Controls.Add(this.LB_Capture);
             this.PN_Capture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_Capture.Location = new System.Drawing.Point(261, 122);
+            this.PN_Capture.Location = new System.Drawing.Point(726, 130);
             this.PN_Capture.Name = "PN_Capture";
             this.PN_Capture.Size = new System.Drawing.Size(204, 34);
             this.PN_Capture.TabIndex = 8;
@@ -217,7 +219,7 @@ namespace SKYNET
             this.PN_StartBucle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_StartBucle.Controls.Add(this.LB_StartBucle);
             this.PN_StartBucle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_StartBucle.Location = new System.Drawing.Point(28, 189);
+            this.PN_StartBucle.Location = new System.Drawing.Point(493, 197);
             this.PN_StartBucle.Name = "PN_StartBucle";
             this.PN_StartBucle.Size = new System.Drawing.Size(206, 34);
             this.PN_StartBucle.TabIndex = 10;
@@ -241,7 +243,7 @@ namespace SKYNET
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label4.Location = new System.Drawing.Point(25, 166);
+            this.label4.Location = new System.Drawing.Point(490, 174);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(138, 17);
             this.label4.TabIndex = 9;
@@ -252,7 +254,7 @@ namespace SKYNET
             this.PN_StopBucle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_StopBucle.Controls.Add(this.LB_StopBucle);
             this.PN_StopBucle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_StopBucle.Location = new System.Drawing.Point(259, 189);
+            this.PN_StopBucle.Location = new System.Drawing.Point(724, 197);
             this.PN_StopBucle.Name = "PN_StopBucle";
             this.PN_StopBucle.Size = new System.Drawing.Size(206, 34);
             this.PN_StopBucle.TabIndex = 12;
@@ -276,26 +278,18 @@ namespace SKYNET
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label6.Location = new System.Drawing.Point(256, 166);
+            this.label6.Location = new System.Drawing.Point(721, 174);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(138, 17);
             this.label6.TabIndex = 11;
             this.label6.Text = "Key to stop click bucle";
-            // 
-            // textBox
-            // 
-            this.textBox.Location = new System.Drawing.Point(626, 338);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(100, 20);
-            this.textBox.TabIndex = 13;
-            this.textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // PN_StartMacroRecording
             // 
             this.PN_StartMacroRecording.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_StartMacroRecording.Controls.Add(this.LB_StartMacroRecording);
             this.PN_StartMacroRecording.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_StartMacroRecording.Location = new System.Drawing.Point(28, 323);
+            this.PN_StartMacroRecording.Location = new System.Drawing.Point(26, 132);
             this.PN_StartMacroRecording.Name = "PN_StartMacroRecording";
             this.PN_StartMacroRecording.Size = new System.Drawing.Size(206, 34);
             this.PN_StartMacroRecording.TabIndex = 15;
@@ -319,7 +313,7 @@ namespace SKYNET
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label5.Location = new System.Drawing.Point(25, 300);
+            this.label5.Location = new System.Drawing.Point(23, 109);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(177, 17);
             this.label5.TabIndex = 14;
@@ -330,7 +324,7 @@ namespace SKYNET
             this.PN_StopMacroRecording.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_StopMacroRecording.Controls.Add(this.LB_StopMacroRecording);
             this.PN_StopMacroRecording.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_StopMacroRecording.Location = new System.Drawing.Point(259, 323);
+            this.PN_StopMacroRecording.Location = new System.Drawing.Point(257, 132);
             this.PN_StopMacroRecording.Name = "PN_StopMacroRecording";
             this.PN_StopMacroRecording.Size = new System.Drawing.Size(206, 34);
             this.PN_StopMacroRecording.TabIndex = 14;
@@ -354,7 +348,7 @@ namespace SKYNET
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label8.Location = new System.Drawing.Point(256, 300);
+            this.label8.Location = new System.Drawing.Point(254, 109);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(177, 17);
             this.label8.TabIndex = 13;
@@ -365,7 +359,7 @@ namespace SKYNET
             this.PN_StopRecordedMacro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_StopRecordedMacro.Controls.Add(this.LB_StopRecordedMacro);
             this.PN_StopRecordedMacro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_StopRecordedMacro.Location = new System.Drawing.Point(259, 388);
+            this.PN_StopRecordedMacro.Location = new System.Drawing.Point(257, 197);
             this.PN_StopRecordedMacro.Name = "PN_StopRecordedMacro";
             this.PN_StopRecordedMacro.Size = new System.Drawing.Size(206, 34);
             this.PN_StopRecordedMacro.TabIndex = 17;
@@ -389,7 +383,7 @@ namespace SKYNET
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label10.Location = new System.Drawing.Point(256, 365);
+            this.label10.Location = new System.Drawing.Point(254, 174);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(162, 17);
             this.label10.TabIndex = 16;
@@ -400,7 +394,7 @@ namespace SKYNET
             this.PN_PlayRecordedMacro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.PN_PlayRecordedMacro.Controls.Add(this.LB_PlayRecordedMacro);
             this.PN_PlayRecordedMacro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PN_PlayRecordedMacro.Location = new System.Drawing.Point(28, 388);
+            this.PN_PlayRecordedMacro.Location = new System.Drawing.Point(26, 197);
             this.PN_PlayRecordedMacro.Name = "PN_PlayRecordedMacro";
             this.PN_PlayRecordedMacro.Size = new System.Drawing.Size(206, 34);
             this.PN_PlayRecordedMacro.TabIndex = 19;
@@ -424,7 +418,7 @@ namespace SKYNET
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label12.Location = new System.Drawing.Point(25, 365);
+            this.label12.Location = new System.Drawing.Point(23, 174);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(172, 17);
             this.label12.TabIndex = 18;
@@ -435,7 +429,7 @@ namespace SKYNET
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(62)))));
             this.panel9.Controls.Add(this.label15);
             this.panel9.Controls.Add(this.label13);
-            this.panel9.Location = new System.Drawing.Point(28, 38);
+            this.panel9.Location = new System.Drawing.Point(493, 46);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(437, 50);
             this.panel9.TabIndex = 20;
@@ -466,7 +460,7 @@ namespace SKYNET
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(62)))));
             this.panel10.Controls.Add(this.label14);
             this.panel10.Controls.Add(this.label16);
-            this.panel10.Location = new System.Drawing.Point(28, 237);
+            this.panel10.Location = new System.Drawing.Point(26, 46);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(437, 50);
             this.panel10.TabIndex = 21;
@@ -495,6 +489,8 @@ namespace SKYNET
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(62)))));
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.LB_AwaitTime);
             this.panel1.Controls.Add(this.BT_SaveFile);
             this.panel1.Controls.Add(this.BT_OpenFile);
             this.panel1.Controls.Add(this.LB_MacroStatus);
@@ -504,10 +500,32 @@ namespace SKYNET
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(28, 598);
+            this.panel1.Location = new System.Drawing.Point(26, 407);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(437, 90);
+            this.panel1.Size = new System.Drawing.Size(437, 105);
             this.panel1.TabIndex = 22;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.label21.Location = new System.Drawing.Point(6, 78);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(46, 17);
+            this.label21.TabIndex = 24;
+            this.label21.Text = "Status:";
+            // 
+            // LB_AwaitTime
+            // 
+            this.LB_AwaitTime.AutoSize = true;
+            this.LB_AwaitTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_AwaitTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.LB_AwaitTime.Location = new System.Drawing.Point(89, 61);
+            this.LB_AwaitTime.Name = "LB_AwaitTime";
+            this.LB_AwaitTime.Size = new System.Drawing.Size(61, 17);
+            this.LB_AwaitTime.TabIndex = 23;
+            this.LB_AwaitTime.Text = "Unknown";
             // 
             // BT_SaveFile
             // 
@@ -554,11 +572,11 @@ namespace SKYNET
             this.LB_MacroStatus.AutoSize = true;
             this.LB_MacroStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_MacroStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(67)))), ((int)(((byte)(54)))));
-            this.LB_MacroStatus.Location = new System.Drawing.Point(89, 61);
+            this.LB_MacroStatus.Location = new System.Drawing.Point(89, 78);
             this.LB_MacroStatus.Name = "LB_MacroStatus";
-            this.LB_MacroStatus.Size = new System.Drawing.Size(50, 17);
+            this.LB_MacroStatus.Size = new System.Drawing.Size(58, 17);
             this.LB_MacroStatus.TabIndex = 20;
-            this.LB_MacroStatus.Text = "Stoped";
+            this.LB_MacroStatus.Text = "Stopped";
             // 
             // label19
             // 
@@ -567,9 +585,9 @@ namespace SKYNET
             this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.label19.Location = new System.Drawing.Point(6, 61);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(46, 17);
+            this.label19.Size = new System.Drawing.Size(60, 17);
             this.label19.TabIndex = 19;
-            this.label19.Text = "Status:";
+            this.label19.Text = "Awaiting:";
             // 
             // LB_MacroDuration
             // 
@@ -631,7 +649,7 @@ namespace SKYNET
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label11.Location = new System.Drawing.Point(25, 497);
+            this.label11.Location = new System.Drawing.Point(23, 306);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(321, 17);
             this.label11.TabIndex = 23;
@@ -642,7 +660,7 @@ namespace SKYNET
             this.CH_MinimizeWhenStarts.BackColor = System.Drawing.Color.Transparent;
             this.CH_MinimizeWhenStarts.Checked = false;
             this.CH_MinimizeWhenStarts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CH_MinimizeWhenStarts.Location = new System.Drawing.Point(430, 495);
+            this.CH_MinimizeWhenStarts.Location = new System.Drawing.Point(428, 304);
             this.CH_MinimizeWhenStarts.Name = "CH_MinimizeWhenStarts";
             this.CH_MinimizeWhenStarts.Size = new System.Drawing.Size(34, 25);
             this.CH_MinimizeWhenStarts.TabIndex = 24;
@@ -653,7 +671,7 @@ namespace SKYNET
             this.CH_RestartBucle.BackColor = System.Drawing.Color.Transparent;
             this.CH_RestartBucle.Checked = false;
             this.CH_RestartBucle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CH_RestartBucle.Location = new System.Drawing.Point(430, 565);
+            this.CH_RestartBucle.Location = new System.Drawing.Point(428, 374);
             this.CH_RestartBucle.Name = "CH_RestartBucle";
             this.CH_RestartBucle.Size = new System.Drawing.Size(34, 25);
             this.CH_RestartBucle.TabIndex = 26;
@@ -664,7 +682,7 @@ namespace SKYNET
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label17.Location = new System.Drawing.Point(25, 567);
+            this.label17.Location = new System.Drawing.Point(23, 376);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(228, 17);
             this.label17.TabIndex = 25;
@@ -674,7 +692,7 @@ namespace SKYNET
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
             this.panel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
-            this.panel7.Location = new System.Drawing.Point(26, 524);
+            this.panel7.Location = new System.Drawing.Point(24, 333);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(440, 1);
             this.panel7.TabIndex = 103;
@@ -683,7 +701,7 @@ namespace SKYNET
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
             this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
-            this.panel2.Location = new System.Drawing.Point(26, 559);
+            this.panel2.Location = new System.Drawing.Point(24, 368);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(440, 1);
             this.panel2.TabIndex = 106;
@@ -693,7 +711,7 @@ namespace SKYNET
             this.CH_ShowPopup.BackColor = System.Drawing.Color.Transparent;
             this.CH_ShowPopup.Checked = false;
             this.CH_ShowPopup.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CH_ShowPopup.Location = new System.Drawing.Point(430, 530);
+            this.CH_ShowPopup.Location = new System.Drawing.Point(428, 339);
             this.CH_ShowPopup.Name = "CH_ShowPopup";
             this.CH_ShowPopup.Size = new System.Drawing.Size(34, 25);
             this.CH_ShowPopup.TabIndex = 105;
@@ -704,7 +722,7 @@ namespace SKYNET
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label18.Location = new System.Drawing.Point(25, 532);
+            this.label18.Location = new System.Drawing.Point(23, 341);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(316, 17);
             this.label18.TabIndex = 104;
@@ -714,7 +732,7 @@ namespace SKYNET
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(61)))), ((int)(((byte)(75)))));
             this.panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(27)))), ((int)(((byte)(32)))));
-            this.panel3.Location = new System.Drawing.Point(26, 489);
+            this.panel3.Location = new System.Drawing.Point(24, 298);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(440, 1);
             this.panel3.TabIndex = 107;
@@ -724,7 +742,7 @@ namespace SKYNET
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.label20.Location = new System.Drawing.Point(25, 446);
+            this.label20.Location = new System.Drawing.Point(23, 255);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(181, 17);
             this.label20.TabIndex = 108;
@@ -737,7 +755,7 @@ namespace SKYNET
             this.TB_MacroInterval.Color = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(60)))), ((int)(((byte)(72)))));
             this.TB_MacroInterval.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.TB_MacroInterval.IsPassword = false;
-            this.TB_MacroInterval.Location = new System.Drawing.Point(259, 438);
+            this.TB_MacroInterval.Location = new System.Drawing.Point(257, 247);
             this.TB_MacroInterval.Logo = global::SKYNET.Properties.Resources.present_64px;
             this.TB_MacroInterval.LogoCursor = System.Windows.Forms.Cursors.Default;
             this.TB_MacroInterval.Name = "TB_MacroInterval";
@@ -748,12 +766,20 @@ namespace SKYNET
             this.TB_MacroInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_MacroInterval.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MacroInterval_KeyUp);
             // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(493, 575);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(100, 20);
+            this.textBox.TabIndex = 13;
+            this.textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(40)))), ((int)(((byte)(52)))));
-            this.ClientSize = new System.Drawing.Size(498, 721);
+            this.ClientSize = new System.Drawing.Size(957, 539);
             this.Controls.Add(this.TB_MacroInterval);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.panel3);
@@ -825,7 +851,6 @@ namespace SKYNET
         private System.Windows.Forms.Panel PN_StopBucle;
         private System.Windows.Forms.Label LB_StopBucle;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Panel PN_StartMacroRecording;
         private System.Windows.Forms.Label LB_StartMacroRecording;
         private System.Windows.Forms.Label label5;
@@ -867,6 +892,9 @@ namespace SKYNET
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label20;
         private Controls.SKYNET_TextBox TB_MacroInterval;
+        public System.Windows.Forms.Label LB_AwaitTime;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox;
     }
 }
 

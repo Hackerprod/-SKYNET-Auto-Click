@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
@@ -31,7 +24,6 @@ namespace SKYNET
         private int Y;
         private MacroManager Macro;
         private bool isCaptured;
-        private bool isRecording;
         private MacroStatus macroStatus;
         private const int WM_HOTKEY = 0x0312;
 
@@ -47,6 +39,7 @@ namespace SKYNET
             Settings.Load();
 
             Macro = new MacroManager();
+            Macro.AwaitTick += Macro_AwaitTick;
         }
 
         private void frmSettings_Load(object sender, EventArgs e)
@@ -70,7 +63,7 @@ namespace SKYNET
 
                 if (Pressed == Settings.Capture)
                 {
-                    if (isRecording) return;
+                    if (Macro.Recording) return;
                     NativeMethods.GetCursorPos(out POINT p);
                     X = p.X;
                     Y = p.Y;
@@ -78,7 +71,7 @@ namespace SKYNET
                 }
                 else if (Pressed == Settings.StartClickBucle)
                 {
-                    if (isRecording) return;
+                    if (Macro.Recording) return;
                     if (!isCaptured)
                     {
                         Common.Show("The program dont have loaded any mouse coordenates" + Environment.NewLine + $"Please press \"{Settings.Capture}\" key to capture");
@@ -90,13 +83,13 @@ namespace SKYNET
                 }
                 else if (Pressed == Settings.StopClickBucle)
                 {
-                    if (isRecording) return;
+                    if (Macro.Recording) return;
                     _timer.Stop();
                 }
                 else if (Pressed == Settings.StartMacroRecording)
                 {
-                    if (isRecording) return;
-                    isRecording = true;
+                    if (Macro.Recording) return;
+                    Macro.Recording = true;
                     Macro.StartRecording();
                     macroStatus = MacroStatus.RecordingMacro;
                     LB_MacroStatus.Text = "Recording";
@@ -106,14 +99,14 @@ namespace SKYNET
                 }
                 else if (Pressed == Settings.StopMacroRecording)
                 {
-                    isRecording = false;
+                    Macro.Recording = false;
                     if (macroStatus == MacroStatus.RecordingMacro)
                     {
                         Macro.StopRecording();
-                        macroStatus = MacroStatus.Stoped;
+                        macroStatus = MacroStatus.Stopped;
                         LB_MacroName.Text = "Macro_" + DateTime.Now.Ticks;
                         LB_MacroDuration.Text = $"{Common.GetTime(Macro.Duration())}";
-                        LB_MacroStatus.Text = "Stoped";
+                        LB_MacroStatus.Text = "Stopped";
                         LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
                         if (Settings.MinimizeWhenStarts) WindowState = FormWindowState.Normal;
                         if (Popup != null) Popup.Close();
@@ -121,7 +114,7 @@ namespace SKYNET
                 }
                 else if (Pressed == Settings.PlayRecordedMacro)
                 {
-                    if (isRecording) return;
+                    if (Macro.Recording) return;
                     if (!Macro.HaveRecordedMacro)
                     {
                         Common.Show("You dont have any recorded macro" + Environment.NewLine + $"Please press \"{Settings.PlayRecordedMacro}\" key to record or load it from file");
@@ -136,7 +129,7 @@ namespace SKYNET
                 }
                 else if (Pressed == Settings.StopRecordedMacro)
                 {
-                    if (isRecording) return;
+                    if (Macro.Recording) return;
                     if (macroStatus == MacroStatus.PlayingMacro)
                     {
                         StopMacro();
@@ -152,10 +145,12 @@ namespace SKYNET
         public static void StopMacro()
         {
             frm.Macro.StopMacro();
-            frm.macroStatus = MacroStatus.Stoped;
-            frm.LB_MacroStatus.Text = "Stoped";
+            frm.macroStatus = MacroStatus.Stopped;
+            frm.LB_MacroStatus.Text = "Stopped";
             frm.LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
-            if (Settings.MinimizeWhenStarts) frm.WindowState = FormWindowState.Normal;
+
+            if (Settings.MinimizeWhenStarts)
+                frm.WindowState = FormWindowState.Normal;
         }
 
         private void LoadKeys()
@@ -328,7 +323,7 @@ namespace SKYNET
                         Macro.Step = events.Count + 1;
                         LB_MacroName.Text = Path.GetFileNameWithoutExtension(openDialog.FileName);
                         LB_MacroDuration.Text = $"{Common.GetTime(Macro.Duration())}";
-                        LB_MacroStatus.Text = "Stoped";
+                        LB_MacroStatus.Text = "Stopped";
                         LB_MacroStatus.ForeColor = Color.FromArgb(243, 67, 54);
                     }
                     else
@@ -409,6 +404,11 @@ namespace SKYNET
         {
             Settings.ShowPopup = CH_ShowPopup.Checked;
             Settings.Save();
+        }
+
+        private void Macro_AwaitTick(object sender, int tick)
+        {
+            LB_AwaitTime.Text = $"{Common.GetTime((tick * 10) + 1)} / {Common.GetTime(Settings.MacroInterval * 1000)}";
         }
     }
 }

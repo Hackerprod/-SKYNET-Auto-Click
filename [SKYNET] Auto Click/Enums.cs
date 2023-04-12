@@ -13,7 +13,7 @@
 public enum MacroStatus
 {
     Unknown,
-    Stoped,
+    Stopped,
     RecordingMacro,
     PlayingMacro
 }

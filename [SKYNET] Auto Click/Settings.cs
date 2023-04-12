@@ -46,7 +46,6 @@ namespace SKYNET
             }
         }
 
-
         public void Load()
         {
             try
@@ -67,6 +66,7 @@ namespace SKYNET
                     MinimizeWhenStarts = s.MinimizeWhenStarts;
                     RestartBucle = s.RestartBucle;
                     MacroInterval = s.MacroInterval;
+                    ShowPopup = s.ShowPopup;
                 }
             }
             catch 
@@ -80,6 +80,7 @@ namespace SKYNET
                 PlayRecordedMacro = Keys.F3;
                 StopRecordedMacro = Keys.F4;
                 MacroInterval = 0;
+                ShowPopup = false;
             }
         }
 
