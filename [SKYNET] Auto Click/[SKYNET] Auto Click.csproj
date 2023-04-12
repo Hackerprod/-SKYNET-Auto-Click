@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,18 +106,18 @@
     <Compile Include="GUI\frmMessage.designer.cs">
       <DependentUpon>frmMessage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hook\KeyboardHook.cs" />
+    <Compile Include="Helpers\Hook\KeyboardHook.cs" />
     <Compile Include="Models\MouseEvent.cs" />
-    <Compile Include="Hook\MouseHelper.cs" />
-    <Compile Include="Hook\MouseHook.cs" />
+    <Compile Include="Helpers\Hook\MouseHelper.cs" />
+    <Compile Include="Helpers\Hook\MouseHook.cs" />
     <Compile Include="Models\KeyPressed.cs" />
     <Compile Include="Models\MOUSEINPUT.cs" />
-    <Compile Include="MacroManager.cs" />
-    <Compile Include="modCommon.cs" />
+    <Compile Include="Helpers\MacroManager.cs" />
+    <Compile Include="Helpers\Common.cs" />
     <Compile Include="Models\NativeMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
